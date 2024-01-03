@@ -15,11 +15,20 @@ function check_keys() {
 
 check_keys();
 
-// Calculating input derived values
+// Calculating x and y inputs
 x_input = keys.right - keys.left;
 y_input = keys.down - keys.up;
+
+// Calculating input direction
 input_direction = point_direction(0, 0, x_input, y_input);
 
+// Calculating speed according to input
+input_speed = abs(x_input) || abs(y_input) * walking_speed;
+if(input_speed > 0) {
+	if(keys.ctrl) input_speed = running_speed;
+	if(keys.shift) input_speed = tiptoeing_speed;
+}
+
 // Updating player speed
-hspeed = x_input != 0 ? lengthdir_x(walking_speed, input_direction) : 0;
-vspeed = y_input != 0 ? lengthdir_y(walking_speed, input_direction) : 0;
+hspeed = lengthdir_x(input_speed, input_direction);
+vspeed = lengthdir_y(input_speed, input_direction);
