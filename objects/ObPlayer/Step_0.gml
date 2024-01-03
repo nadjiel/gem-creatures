@@ -32,3 +32,21 @@ if(input_speed > 0) {
 // Updating player speed
 hspeed = lengthdir_x(input_speed, input_direction);
 vspeed = lengthdir_y(input_speed, input_direction);
+
+// Jumping if player is on the floor
+if(z == 0) z_speed = keys.space * -jumping_speed;
+
+// Falling if player is midair
+if(z < 0) z_speed += falling_accelaration;
+
+// Colliding with the floor
+if(z + z_speed >= 0) {
+	z_speed = 0;
+	z = 0;
+}
+
+// Incrementing the z speed into the z axis
+z += z_speed;
+
+show_debug_message("z_speed: " + string(z_speed))
+show_debug_message("z: " + string(z))
