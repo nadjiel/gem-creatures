@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
-  "name": "SpPlayerWalkingRight",
+  "name": "spr_player_walking_up",
   "bbox_bottom": 15,
   "bbox_left": 4,
   "bbox_right": 11,
@@ -13,15 +13,16 @@
   "edgeFiltering": false,
   "For3D": false,
   "frames": [
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"837c1eae-ddd1-43a8-9e18-d62e5dd057fd",},
-    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"3eef5751-2c9b-4839-be98-f1303a2c4050",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"6dfe3b78-1064-4b62-88e0-082a8bf41557",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"2453143b-64c7-4963-bd68-6687d34f238c",},
+    {"resourceType":"GMSpriteFrame","resourceVersion":"1.1","name":"178cbd6e-f24f-462b-810f-df1b68286793",},
   ],
   "gridX": 0,
   "gridY": 0,
   "height": 16,
   "HTile": false,
   "layers": [
-    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"bd39dbf9-d805-461c-b167-da960dd72f4c","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
+    {"resourceType":"GMImageLayer","resourceVersion":"1.0","name":"aedd7ff5-537c-4fae-88e4-4827118dfc5d","blendMode":0,"displayName":"default","isLocked":false,"opacity":100.0,"visible":true,},
   ],
   "nineSlice": null,
   "origin": 4,
@@ -33,7 +34,7 @@
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "SpPlayerWalkingRight",
+    "name": "spr_player_walking_up",
     "autoRecord": true,
     "backdropHeight": 768,
     "backdropImageOpacity": 0.5,
@@ -44,7 +45,7 @@
     "events": {"resourceType":"KeyframeStore<MessageEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "eventStubScript": null,
     "eventToFunction": {},
-    "length": 2.0,
+    "length": 3.0,
     "lockOrigin": false,
     "moments": {"resourceType":"KeyframeStore<MomentsEventKeyframe>","resourceVersion":"1.0","Keyframes":[],},
     "playback": 1,
@@ -55,8 +56,9 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"837c1eae-ddd1-43a8-9e18-d62e5dd057fd","path":"sprites/SpPlayerWalkingRight/SpPlayerWalkingRight.yy",},},},"Disabled":false,"id":"f161ad8f-266d-40b2-a264-01f3bc847bad","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"3eef5751-2c9b-4839-be98-f1303a2c4050","path":"sprites/SpPlayerWalkingRight/SpPlayerWalkingRight.yy",},},},"Disabled":false,"id":"3929d208-fba6-4ef8-9d90-0ecbb7ceb0fc","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"6dfe3b78-1064-4b62-88e0-082a8bf41557","path":"sprites/spr_player_walking_up/spr_player_walking_up.yy",},},},"Disabled":false,"id":"0e5ac17f-82ec-4b9e-82a5-1cd9577a5f89","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"2453143b-64c7-4963-bd68-6687d34f238c","path":"sprites/spr_player_walking_up/spr_player_walking_up.yy",},},},"Disabled":false,"id":"437d4adf-db4c-4dc8-9463-efea489e60f0","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"178cbd6e-f24f-462b-810f-df1b68286793","path":"sprites/spr_player_walking_up/spr_player_walking_up.yy",},},},"Disabled":false,"id":"61cb52e2-8feb-4d63-8115-0e9bedd15e64","IsCreationKey":false,"Key":2.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

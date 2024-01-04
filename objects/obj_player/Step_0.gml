@@ -1,7 +1,5 @@
 /// @description Step event
 
-// TODO: make sprite frame rate faster according to the speed
-
 // Checking for key input
 function check_keys() {
 	keys.right = keyboard_check(ord("D"));
@@ -27,6 +25,9 @@ input_speed = abs(x_input) || abs(y_input) * walking_speed;
 if(input_speed > 0) {
 	if(keys.ctrl) input_speed = running_speed;
 	if(keys.shift) input_speed = tiptoeing_speed;
+	
+	// Choosing sprite according to input direction
+	pick_sprite_direction("spr_player_walking", input_direction);
 }
 
 // Updating player speed
@@ -48,5 +49,5 @@ if(z + z_speed >= 0) {
 // Incrementing the z speed into the z axis
 z += z_speed;
 
-show_debug_message("z_speed: " + string(z_speed))
-show_debug_message("z: " + string(z))
+// Adjusting image speed according to player speed
+image_speed = (max_image_speed * speed) / running_speed;

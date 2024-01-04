@@ -13,12 +13,12 @@
     {"name":"Shaders","order":6,"path":"folders/Shaders.yy",},
     {"name":"Sounds","order":3,"path":"folders/Sounds.yy",},
     {"name":"Sprites","order":1,"path":"folders/Sprites.yy",},
+    {"name":"Player","order":1,"path":"folders/Sprites/Player.yy",},
     {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
-    {"name":"Player","order":1,"path":"folders/Sprites/Player.yy",},
   ],
   "ResourceOrderSettings": [
-    {"name":"SpPlayerWalkingDown","order":2,"path":"sprites/SpPlayerWalkingDown/SpPlayerWalkingDown.yy",},
-    {"name":"SpPlayerWalkingUp","order":1,"path":"sprites/SpPlayerWalkingUp/SpPlayerWalkingUp.yy",},
+    {"name":"spr_player_walking_down","order":2,"path":"sprites/spr_player_walking_down/spr_player_walking_down.yy",},
+    {"name":"spr_player_walking_up","order":1,"path":"sprites/spr_player_walking_up/spr_player_walking_up.yy",},
   ],
 }
