@@ -1,4 +1,4 @@
-/// @description Drawing sprite
+/// @description Draw event
 
 // Drawing sprite taking z axis into account
 draw_sprite_ext(

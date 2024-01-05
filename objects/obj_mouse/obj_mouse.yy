@@ -1,16 +1,15 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_player",
+  "name": "obj_mouse",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,},
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
   ],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "Creatures",
+    "path": "folders/Objects/Creatures.yy",
   },
   "parentObjectId": {
     "name": "obj_entity",
@@ -32,8 +31,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_player_walking_down",
-    "path": "sprites/spr_player_walking_down/spr_player_walking_down.yy",
+    "name": "spr_mouse_walking_down",
+    "path": "sprites/spr_mouse_walking_down/spr_mouse_walking_down.yy",
   },
   "spriteMaskId": null,
   "visible": true,
