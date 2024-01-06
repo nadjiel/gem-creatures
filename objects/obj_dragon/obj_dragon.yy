@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_mouse",
+  "name": "obj_dragon",
   "eventList": [
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,},
   ],
@@ -31,8 +31,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "spr_mouse_walking_down",
-    "path": "sprites/spr_mouse_walking_down/spr_mouse_walking_down.yy",
+    "name": "spr_dragon_walking_down",
+    "path": "sprites/spr_dragon_walking_down/spr_dragon_walking_down.yy",
   },
   "spriteMaskId": null,
   "visible": true,

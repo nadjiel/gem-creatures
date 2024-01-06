@@ -1,5 +1,15 @@
 /// @description Step event
 
+if(leader) {
+	show_debug_message(point_distance(x, y, leader.x, leader.y))
+	if(point_distance(x, y, leader.x, leader.y) > TILE_SIZE) {
+		speed = leader.speed;
+		direction = point_direction(x, y, leader.x, leader.y);
+	} else {
+		speed = 0;
+	}
+}
+
 // Falling if in midair
 if(z < 0) z_speed += falling_accelaration;
 
