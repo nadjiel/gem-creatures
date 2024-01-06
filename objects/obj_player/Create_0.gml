@@ -1,7 +1,5 @@
 /// @description Creation code
 
-event_inherited();
-
 // Keys that control the player
 keys = {
 	right: false,

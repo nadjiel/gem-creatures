@@ -1,7 +1,7 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_mouse",
+  "name": "obj_creature",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],
@@ -10,8 +10,8 @@
     "path": "folders/Objects/Creatures.yy",
   },
   "parentObjectId": {
-    "name": "obj_creature",
-    "path": "objects/obj_creature/obj_creature.yy",
+    "name": "obj_entity",
+    "path": "objects/obj_entity/obj_entity.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
@@ -28,10 +28,7 @@
   "physicsStartAwake": true,
   "properties": [],
   "solid": false,
-  "spriteId": {
-    "name": "spr_mouse_walking_down",
-    "path": "sprites/spr_mouse_walking_down/spr_mouse_walking_down.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }
