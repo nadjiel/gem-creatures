@@ -68,6 +68,7 @@
     {"id":{"name":"spr_ball_walking_up","path":"sprites/spr_ball_walking_up/spr_ball_walking_up.yy",},},
     {"id":{"name":"spr_bird_walking_down","path":"sprites/spr_bird_walking_down/spr_bird_walking_down.yy",},},
     {"id":{"name":"spr_bird_walking_right","path":"sprites/spr_bird_walking_right/spr_bird_walking_right.yy",},},
+    {"id":{"name":"scr_controllable","path":"scripts/scr_controllable/scr_controllable.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
   ],
   "RoomOrderNodes": [

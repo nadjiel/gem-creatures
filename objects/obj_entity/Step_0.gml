@@ -1,5 +1,8 @@
 /// @description Step event
 
+// Allows the player to control this entity, if it is controllable
+if(controllable) controllable.control();
+
 // Following leader, if any
 if(leader) {
 	//show_debug_message(point_distance(x, y, leader.x, leader.y))
