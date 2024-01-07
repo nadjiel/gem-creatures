@@ -19,3 +19,5 @@ y_input = 0;
 input_direction = 0;
 input_speed = 0;
 jump_input = 0;
+
+max_party_size = 5;
