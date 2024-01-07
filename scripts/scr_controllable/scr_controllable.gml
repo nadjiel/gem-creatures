@@ -48,9 +48,6 @@ function Controllable() constructor {
 		// Calculating direction from input
 		if(direction_input) other.direction = point_direction(0, 0, x_input, y_input);
 
-		// Picking sprite based on direction
-		with(other) pick_sprite_direction("spr_player_walking", direction);
-
 		// Calculating speed based on input
 		other.speed = direction_input * other.walking_speed;
 		if(other.speed > 0) {

@@ -9,34 +9,19 @@ keys.four = keyboard_check_pressed(ord("4"));
 keys.five = keyboard_check_pressed(ord("5"));
 
 if(keys.f1) debug = !debug;
-if(keys.f2) {
+if(keys.f2) {/*
 	instance_id[5].party_add_leader(instance_id[4]);
 	instance_id[4].party_add_leader(instance_id[3]);
 	instance_id[4].party_add_leader(instance_id[2]);
-	instance_id[3].party_add_leader(instance_id[1]);
-}/*
-if(keys.one) {
-	with(instance_id[2]) {
-		set_leader(!leader ? instance_id[1] : noone);
-	}
+	instance_id[3].party_add_leader(instance_id[1]);*/
+	
+	instance_id[1].party_add_leader(instance_id[2]);
+	instance_id[2].party_add_leader(instance_id[3]);
+	instance_id[3].party_add_leader(instance_id[4]);
+	instance_id[4].party_add_leader(instance_id[5]);
 }
-if(keys.two) {
-	with(instance_id[3]) {
-		set_leader(!leader ? instance_id[2] : noone);
-	}
-}
-if(keys.three) {
-	with(instance_id[4]) {
-		set_leader(!leader ? instance_id[3] : noone);
-	}
-}
-if(keys.four) {
-	with(instance_id[5]) {
-		set_leader(!leader ? instance_id[4] : noone);
-	}
-}
-if(keys.five) {
-	with(instance_id[6]) {
-		set_leader(!leader ? instance_id[5] : noone);
-	}
-}*/
+if(keys.one) instance_id[1].party_add_leader(instance_id[2]);
+if(keys.two) instance_id[2].party_add_leader(instance_id[3]);
+if(keys.three) instance_id[3].party_add_leader(instance_id[4]);
+if(keys.four) instance_id[4].party_add_leader(instance_id[5]);
+if(keys.five) instance_id[5].party_add_leader(instance_id[6]);

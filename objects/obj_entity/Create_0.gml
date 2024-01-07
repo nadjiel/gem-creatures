@@ -48,6 +48,14 @@ function party_add_leader(_leader) {
 	
 	_entity.leader = _leader;
 	_leader.follower = _entity;
+	
+	show_debug_message(_entity.controllable)
+	
+	// Passes the controllable from the last leader to the new leader
+	if(_entity.controllable) {
+		_leader.controllable = _entity.controllable;
+		_entity.controllable = 0;
+	}
 }
 
 /**
