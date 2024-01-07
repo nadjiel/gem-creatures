@@ -11,4 +11,10 @@ if(keys.f2) {
 	with(instance_id[3]) {
 		leader = !leader ? instance_id[2] : noone;
 	}
+	with(instance_id[4]) {
+		leader = !leader ? instance_id[3] : noone;
+	}
+	with(instance_id[5]) {
+		leader = !leader ? instance_id[4] : noone;
+	}
 }
