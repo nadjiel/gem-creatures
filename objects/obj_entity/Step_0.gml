@@ -1,5 +1,6 @@
 /// @description Step event
 
+// Following leader, if any
 if(leader) {
 	//show_debug_message(point_distance(x, y, leader.x, leader.y))
 	if(point_distance(x, y, leader.x, leader.y) > TILE_SIZE) {

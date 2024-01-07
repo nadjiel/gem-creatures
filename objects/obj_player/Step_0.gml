@@ -18,23 +18,20 @@ check_keys();
 // Calculating x and y inputs
 x_input = keys.right - keys.left;
 y_input = keys.down - keys.up;
+direction_input = abs(x_input) || abs(y_input);
 
-// Calculating input direction
-input_direction = point_direction(0, 0, x_input, y_input);
+// Calculating direction from input
+if(direction_input) direction = point_direction(0, 0, x_input, y_input);
 
-// Calculating speed according to input
-input_speed = abs(x_input) || abs(y_input) * walking_speed;
-if(input_speed > 0) {
-	if(keys.ctrl) input_speed = running_speed;
-	if(keys.shift) input_speed = tiptoeing_speed;
-	
-	// Choosing sprite according to input direction
-	pick_sprite_direction("spr_player_walking", input_direction);
+// Picking sprite based on direction
+pick_sprite_direction("spr_player_walking", direction);
+
+// Calculating speed based on input
+speed = direction_input * walking_speed;
+if(speed > 0) {
+	if(keys.ctrl) speed = running_speed;
+	if(keys.shift) speed = tiptoeing_speed;
 }
-
-// Updating player speed
-hspeed = lengthdir_x(input_speed, input_direction);
-vspeed = lengthdir_y(input_speed, input_direction);
 
 // Jumping if player is on the floor
 if(z == 0) z_speed = keys.space * -jumping_speed;
