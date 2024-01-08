@@ -1,6 +1,6 @@
 /// @description Step event
 
-// Allows the player to control this entity, if it is controllable
+// Allows the user to control this entity, if it is controllable
 if(controllable) controllable.control();
 
 // Following leader, if any

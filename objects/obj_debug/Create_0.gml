@@ -1,13 +1,10 @@
 /// @description Variable definitions
 
+// The keys that can control the debug mode
 keys = {
 	f1: false,
-	f2: false,
-	one: false,
-	two: false,
-	three: false,
-	four: false,
-	five: false
+	f2: false
 };
 
+// Flag that tells if debug mode is on or off
 debug = false;

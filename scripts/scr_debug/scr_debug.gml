@@ -1,3 +1,6 @@
+// Variable that counts how many frames have passed in the game
+global.frame_counter = 0;
+
 /**
  * @desc Draws the object bounding box
  */

@@ -1,4 +1,13 @@
 /**
+ * @desc Util function that converts seconds into miliseconds
+ * @param {Real} _seconds the amount of seconds to convert
+ * @returns {Real} the amount of seconds received in miliseconds
+ */
+function seconds_to_miliseconds(_seconds) {
+	return _seconds * 1000;
+}
+
+/**
  * @desc Returns a string ("right", "up", "left" or "down") describing the passed angle
  * @param {Real} _angle an angle from 0 to 360
  * @returns {String} either "right", "up", "left" or "down"
