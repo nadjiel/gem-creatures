@@ -1,7 +1,7 @@
 {
   "resourceType": "GMSprite",
   "resourceVersion": "1.0",
-  "name": "spr_player_walking_right",
+  "name": "spr_hero_walking_right",
   "bbox_bottom": 15,
   "bbox_left": 4,
   "bbox_right": 11,
@@ -26,14 +26,14 @@
   "nineSlice": null,
   "origin": 9,
   "parent": {
-    "name": "Player",
-    "path": "folders/Sprites/Player.yy",
+    "name": "Hero",
+    "path": "folders/Sprites/Hero.yy",
   },
   "preMultiplyAlpha": false,
   "sequence": {
     "resourceType": "GMSequence",
     "resourceVersion": "1.4",
-    "name": "spr_player_walking_right",
+    "name": "spr_hero_walking_right",
     "autoRecord": true,
     "backdropHeight": 768,
     "backdropImageOpacity": 0.5,
@@ -55,8 +55,8 @@
     "timeUnits": 1,
     "tracks": [
       {"resourceType":"GMSpriteFramesTrack","resourceVersion":"1.0","name":"frames","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<SpriteFrameKeyframe>","resourceVersion":"1.0","Keyframes":[
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"837c1eae-ddd1-43a8-9e18-d62e5dd057fd","path":"sprites/spr_player_walking_right/spr_player_walking_right.yy",},},},"Disabled":false,"id":"f161ad8f-266d-40b2-a264-01f3bc847bad","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
-            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"3eef5751-2c9b-4839-be98-f1303a2c4050","path":"sprites/spr_player_walking_right/spr_player_walking_right.yy",},},},"Disabled":false,"id":"3929d208-fba6-4ef8-9d90-0ecbb7ceb0fc","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"837c1eae-ddd1-43a8-9e18-d62e5dd057fd","path":"sprites/spr_hero_walking_right/spr_hero_walking_right.yy",},},},"Disabled":false,"id":"f161ad8f-266d-40b2-a264-01f3bc847bad","IsCreationKey":false,"Key":0.0,"Length":1.0,"Stretch":false,},
+            {"resourceType":"Keyframe<SpriteFrameKeyframe>","resourceVersion":"1.0","Channels":{"0":{"resourceType":"SpriteFrameKeyframe","resourceVersion":"1.0","Id":{"name":"3eef5751-2c9b-4839-be98-f1303a2c4050","path":"sprites/spr_hero_walking_right/spr_hero_walking_right.yy",},},},"Disabled":false,"id":"3929d208-fba6-4ef8-9d90-0ecbb7ceb0fc","IsCreationKey":false,"Key":1.0,"Length":1.0,"Stretch":false,},
           ],},"modifiers":[],"spriteId":null,"trackColour":0,"tracks":[],"traits":0,},
     ],
     "visibleRange": null,

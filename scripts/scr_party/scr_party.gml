@@ -57,6 +57,44 @@ function Party(_leader) constructor {
 	
 		return _member;
 	}
+	
+	/**
+	 * @desc Finds the position corresponding to the passed member, or -1, if the member isn't in the party
+	 * @param {Id.Instance} _searched_member the member of whom to find the position.
+	 *     If noone, -1 is returned
+	 * @returns {Real} a number corresponding to the position of the member in the party,
+	 *     or -1, if the instance isn't a party member
+	 */
+	static find_position = function(_searched_member) {
+		var _searched_position = -1;
+		
+		if(_searched_member == noone) return _searched_position;
+		
+		var _member = leader;
+		var _current_position = 0;
+		var _members_amount = count_members();
+		
+		while(_current_position < _members_amount) {
+			if(_searched_member.id == _member.id) {
+				_searched_position = _current_position;
+				break;
+			}
+			
+			_member = _member.follower;
+			_current_position++;
+		}
+		
+		return _searched_position;
+	}
+	
+	/**
+	 * @desc Tells if the passed instance is a member of the party
+	 * @param {Id.Instance} _member the instance you want to find out if is a party member
+	 * @returns {Bool} boolean indicating if the received instance is a party member
+	 */
+	static contains = function(_member) {
+		return find_position(_member) != -1;
+	}
 
 	/**
 	 * @desc Adds a new leader to the party, if it isn't full.

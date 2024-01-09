@@ -69,7 +69,7 @@ function Controllable() constructor {
 	/**
 	 * @desc Handles the user input to control the entity that has this struct
 	 */
-	static control = function() {
+	static step = function() {
 		// Executes the following code only if it hasn't been executed in this frame yet
 		if(global.frame_counter == last_control) return;
 		

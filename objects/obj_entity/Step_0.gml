@@ -1,7 +1,7 @@
 /// @description Step event
 
 // Allows the user to control this entity, if it is controllable
-if(controllable) controllable.control();
+if(controllable) controllable.step();
 
 // Following leader, if any
 if(leader) {
