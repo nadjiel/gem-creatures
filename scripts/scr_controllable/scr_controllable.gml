@@ -2,8 +2,10 @@
  * @desc Constructor for a struct that allows the player to control an entity that has it.
  */
 function Controllable() constructor {
-	// Stores in what frame the control method was last executed
-	last_control = global.frame_counter;
+	// Stores in what frame the step method was last executed
+	last_step = global.frame_counter;
+	// Stores in what frame the creature_collision method was last executed
+	last_creature_collision = global.frame_counter;
 	
 	// Stores the party of this entity
 	party = new Party(other);
@@ -71,7 +73,7 @@ function Controllable() constructor {
 	 */
 	static step = function() {
 		// Executes the following code only if it hasn't been executed in this frame yet
-		if(global.frame_counter == last_control) return;
+		if(global.frame_counter == last_step) return;
 		
 		// Checking for key input
 		check_keys();
@@ -99,8 +101,24 @@ function Controllable() constructor {
 		// Jumping if player is on the floor
 		if(other.z == 0) other.z_speed = keys.space * -other.jumping_speed;
 		
-		// Assigns the number of the current frame to the last_control variable
-		last_control = global.frame_counter;
+		// Assigns the number of the current frame to the last_step variable
+		last_step = global.frame_counter;
+	}
+	
+	/**
+	 * @desc Handles what happens when entity owner of this controllable collides with a creature
+	 */
+	static creature_collision = function() {
+		// Executes the following code only if it hasn't been executed in this frame yet
+		if(global.frame_counter == last_creature_collision) return;
+		
+		// Adds the collider creature to the party if the leader is the hero
+		if(object_get_name(party.leader.object_index) == "obj_hero") {
+			if(!party.contains(other)) party.add_follower(other);
+		}
+		
+		// Assigns the number of the current frame to the last_creature_collision variable
+		last_creature_collision = global.frame_counter;
 	}
 
 }

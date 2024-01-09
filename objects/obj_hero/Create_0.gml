@@ -1,4 +1,4 @@
-/// @description Creation code
+/// @description Default controllable
 
 event_inherited();
 
