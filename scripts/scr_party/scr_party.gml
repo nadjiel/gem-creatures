@@ -5,7 +5,7 @@
 function Party(_leader) constructor {
 	
 	// Variable defining the maximum size of the party
-	max_size = 5;
+	static max_size = 5;
 	
 	// Variable containing the leader of the party
 	leader = _leader;
@@ -14,7 +14,7 @@ function Party(_leader) constructor {
 	 * @desc Returns how many members are in this party
 	 * @returns {Real} an integer corresponding to the amount of entities in the party
 	 */
-	function count_members() {
+	static count_members = function() {
 		var _member = leader;
 		var _members_amount = 1;
 	
@@ -31,7 +31,7 @@ function Party(_leader) constructor {
 	 * @desc Tells if the party is full or not
 	 * @returns {Bool} a boolean indicating if the party is full
 	 */
-	function is_full() {
+	static is_full = function() {
 		return count_members() >= max_size;
 	}
 
@@ -41,7 +41,7 @@ function Party(_leader) constructor {
 	 *     The value received here is rounded in case it isn't an integer as expected
 	 * @returns {Id.Instance} the entity in the passed position, or noone if there aren't any
 	 */
-	function find_by_position(_position) {
+	static find_by_position = function(_position) {
 		_position = round(_position);
 		if(_position < 0 || _position >= count_members()) return noone;
 	
@@ -63,7 +63,7 @@ function Party(_leader) constructor {
 	 *     The new leader gets the controllable from the former leader
 	 * @param {Id.Instance} _new_leader the member that will lead the party
 	 */
-	function add_leader(_new_leader) {
+	static add_leader = function(_new_leader) {
 		if(_new_leader == noone) return;
 		if(is_full()) return;
 		
@@ -85,7 +85,7 @@ function Party(_leader) constructor {
 	 * @desc Adds a new follower to the party, if it isn't full
 	 * @param {Id.Instance} _new_follower the member that will follow the party
 	 */
-	function add_follower(_new_follower) {
+	static add_follower = function(_new_follower) {
 		if(_new_follower == noone) return;
 		if(is_full()) return;
 		
@@ -108,7 +108,7 @@ function Party(_leader) constructor {
 	 *     The value received here is rounded in case it isn't an integer as expected.
 	 *     If no value is passed, it defaults to 0
 	 */
-	function add_member(_new_member, _position = 0) {
+	static add_member = function(_new_member, _position = 0) {
 		if(_new_member == noone) return;
 		
 		// How many members are in the party
@@ -144,7 +144,7 @@ function Party(_leader) constructor {
 	 * @returns {Id.Instance} the former leader of the party or noone,
 	 *     if the remotion hasn't succeded
 	 */
-	function remove_leader() {
+	static remove_leader = function() {
 		if(count_members() == 1) return noone;
 		
 		var _former_leader = leader;
@@ -171,7 +171,7 @@ function Party(_leader) constructor {
 	 * @returns {Id.Instance} the former follower of the party or noone,
 	 *     if the remotion hasn't succeded
 	 */
-	function remove_follower() {
+	static remove_follower = function() {
 		if(count_members() == 1) return noone;
 		
 		var _member = leader;
@@ -195,7 +195,7 @@ function Party(_leader) constructor {
 	 *     The value received here is rounded in case it isn't an integer as expected.
 	 *     If no value is passed, it defaults to 0
 	 */
-	function remove_member(_position = 0) {
+	static remove_member = function(_position = 0) {
 		// How many members are in the party
 		var _members_amount = count_members();
 		
@@ -232,7 +232,7 @@ function Party(_leader) constructor {
 	 *     And if the value is greater than the party size - 1, nothing happens either,
 	 *     because there's no one there to assume the post
 	 */
-	function swap_leader(_new_leader_position) {
+	static swap_leader = function(_new_leader_position) {
 		if(_new_leader_position == 0) return;
 		
 		var _new_leader = remove_member(_new_leader_position);

@@ -36,7 +36,7 @@ function Controllable() constructor {
 	/**
 	 * @desc Checks which keys are being inputed by the user
 	 */
-	function check_keys() {
+	static check_keys = function() {
 		keys.right = keyboard_check(ord("D"));
 		keys.up = keyboard_check(ord("W"));
 		keys.left = keyboard_check(ord("A"));
@@ -54,7 +54,7 @@ function Controllable() constructor {
 	 * @desc Executes a party swap if the input tells to do so and
 	 * the last party swap was executed at least half second ago
 	 */
-	function party_swap() {
+	static party_swap = function() {
 		if(current_time - last_party_swap <= seconds_to_miliseconds(0.5)) return;
 		if(!keys.one && !keys.two && !keys.three && !keys.four) return;
 		
@@ -69,7 +69,7 @@ function Controllable() constructor {
 	/**
 	 * @desc Handles the user input to control the entity that has this struct
 	 */
-	function control() {
+	static control = function() {
 		// Executes the following code only if it hasn't been executed in this frame yet
 		if(global.frame_counter == last_control) return;
 		
