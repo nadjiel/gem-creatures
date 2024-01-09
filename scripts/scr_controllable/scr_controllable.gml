@@ -1,14 +1,15 @@
 /**
- * @desc Constructor for a struct that allows the player to control an entity that has it
+ * @desc Constructor for a struct that allows the player to control an entity that has it.
  */
 function Controllable() constructor {
 	// Stores in what frame the control method was last executed
 	last_control = global.frame_counter;
 	
+	// Stores the party of this entity
+	party = new Party(other);
+	
 	// Stores when in miliseconds the last_party_swap occured
 	last_party_swap = current_time;
-	
-	show_debug_message(last_party_swap)
 	
 	// Keys that control the entity
 	keys = {
@@ -59,17 +60,16 @@ function Controllable() constructor {
 		
 		last_party_swap = current_time;
 		
-		if(keys.one) return other.party_swap_leader(2);
-		if(keys.two) return other.party_swap_leader(3);
-		if(keys.three) return other.party_swap_leader(4);
-		if(keys.four) return other.party_swap_leader(5);
+		if(keys.one) return party.swap_leader(1);
+		if(keys.two) return party.swap_leader(2);
+		if(keys.three) return party.swap_leader(3);
+		if(keys.four) return party.swap_leader(4);
 	}
 	
 	/**
 	 * @desc Handles the user input to control the entity that has this struct
 	 */
 	function control() {
-		show_debug_message(last_control)
 		// Executes the following code only if it hasn't been executed in this frame yet
 		if(global.frame_counter == last_control) return;
 		
@@ -78,6 +78,8 @@ function Controllable() constructor {
 		
 		// Tries to execute a party swap
 		party_swap();
+		
+		//show_debug_message(party.is_full())
 
 		// Calculating x and y inputs
 		x_input = keys.right - keys.left;
