@@ -1,8 +1,9 @@
-///
-function show_speed() {
-	draw_text(x, y, speed);
-}
+// Variable that counts how many frames have passed in the game
+global.frame_counter = 0;
 
+/**
+ * @desc Draws the object bounding box
+ */
 function draw_bbox() {
 	draw_line(bbox_right, bbox_bottom, bbox_right, bbox_top);
 	draw_line(bbox_right, bbox_top, bbox_left, bbox_top);
@@ -10,25 +11,16 @@ function draw_bbox() {
 	draw_line(bbox_left, bbox_bottom, bbox_right, bbox_bottom);
 }
 
-function draw_sprite_bbox() {
-	show_debug_message("sprite_width: " + string(sprite_width))
-	show_debug_message("sprite_height: " + string(sprite_height))
-	show_debug_message("sprite_bbox_right: " + string(sprite_get_bbox_right(image_index)))
-	show_debug_message("sprite_bbox_top: " + string(sprite_get_bbox_top(image_index)))
-	show_debug_message("sprite_bbox_left: " + string(sprite_get_bbox_left(image_index)))
-	show_debug_message("sprite_bbox_bottom: " + string(sprite_get_bbox_bottom(image_index)))
-	show_debug_message("bbox_right: " + string(bbox_right))
-	show_debug_message("bbox_top: " + string(bbox_top))
-	show_debug_message("bbox_left: " + string(bbox_left))
-	show_debug_message("bbox_bottom: " + string(bbox_bottom))
+/**
+ * @desc Draws a cross on the screen
+ * @param {Real} _x the x position of the center of the cross
+ * @param {Real} _y the y position of the center of the cross
+ * @param {Real} _size the length of the cross lines
+ * @param {Constant.Color} _color the color with which to draw the cross
+ */
+function draw_cross(_x, _y, _size, _color = c_white) {
+	draw_set_color(_color);
 	
-	var _right = bbox_right + sprite_width - sprite_get_bbox_right(image_index);
-	var _top = bbox_top - sprite_get_bbox_top(image_index);
-	var _left = bbox_left - sprite_get_bbox_left(image_index);
-	var _bottom = bbox_bottom + sprite_height - sprite_get_bbox_bottom(image_index);
-	
-	draw_line(_right, _bottom, _right, _top);
-	draw_line(_right, _top, _left, _top);
-	draw_line(_left, _top, _left, _bottom);
-	draw_line(_left, _bottom, _right, _bottom);
+	draw_line(_x - _size / 2, _y, _x + _size / 2, _y);
+	draw_line(_x, _y - _size / 2, _x, _y + _size / 2);
 }
