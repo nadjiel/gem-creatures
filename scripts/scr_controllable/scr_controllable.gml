@@ -80,8 +80,6 @@ function Controllable() constructor {
 		
 		// Tries to execute a party swap
 		party_swap();
-		
-		//show_debug_message(party.is_full())
 
 		// Calculating x and y inputs
 		x_input = keys.right - keys.left;
