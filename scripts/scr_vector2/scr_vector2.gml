@@ -1,17 +1,28 @@
 /**
  * @desc Constructs a Vector2 that provides some vector operations
+ * @param {Real} _x the vector's x coordinate
+ * @param {Real} _y the vector's y coordinate
  */
 function Vector2(_x = 0, _y = 0) constructor {
 	x = _x;
 	y = _y;
 	
 	/**
+	 * @desc Sums this vector with the passed vector
+	 * @param {Struct.Vector2} _vector the vector to sum with
+	 */
+	static plus = function(_vector) {
+		x += _vector.x;
+		y += _vector.y;
+	}
+	
+	/**
 	 * @desc Subtracts this vector with the passed vector
 	 * @param {Struct.Vector2} _vector the vector to subtract with
-	 * @returns {Struct.Vector2} a vector resultant of the subtraction
 	 */
-	static subtract = function(_vector) {
-		return new Vector2(x - _vector.x, y - _vector.y);
+	static minus = function(_vector) {
+		x -= _vector.x;
+		y -= _vector.y;
 	}
 	
 	/**

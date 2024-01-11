@@ -27,7 +27,7 @@ function angle_to_direction(_angle) {
  * @param {String} _sprite_name the name of the sprites to choose from without the "_direction" suffix
  * @param {Real} _angle the angle with which to choose the sprite
  */
-function pick_sprite_direction(_sprite_name, _angle = direction) {
+function pick_sprite_direction(_sprite_name, _angle) {
 	var _direction = angle_to_direction(_angle);
 	
 	if(_direction == "right") image_xscale = 1;

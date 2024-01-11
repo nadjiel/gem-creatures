@@ -1,33 +1,48 @@
 /// @description Step event
 
+#region Speed calculations
 // Allows the user to control this entity, if it is controllable
 if(controllable) controllable.step();
 
 // Following leader, if any
 if(leader) {
-	//show_debug_message(point_distance(x, y, leader.x, leader.y))
-	if(point_distance(x, y, leader.x, leader.y) > TILE_SIZE) {
-		speed = leader.speed;
-		direction = point_direction(x, y, leader.x, leader.y);
+	if(point_distance(coord.x, coord.y, leader.coord.x, leader.coord.y) > TILE_SIZE) {
+		spd = leader.spd;
+		dir = point_direction(coord.x, coord.y, leader.coord.x, leader.coord.y);
 	} else {
-		speed = 0;
+		spd = 0;
 	}
 }
 
 // Falling if in midair
-if(z < 0) z_speed += falling_accelaration;
-
+if(coord.z < 0) z_spd += falling_acc;
 // Colliding with the floor
-if(z + z_speed >= 0) {
-	z_speed = 0;
-	z = 0;
+if(coord.z + z_spd >= 0) {
+	z_spd = 0;
+	coord.z = 0;
 }
 
-// Incrementing the z speed into the z axis
-z += z_speed;
+// Updating the x and y speeds based on the current entity speed and direction
+x_spd = lengthdir_x(spd, dir);
+y_spd = lengthdir_y(spd, dir);
+#endregion
 
+#region Coordinate incrementation
+// Incrementing the speeds into the axis
+coord.x += x_spd;
+coord.y += y_spd;
+coord.z += z_spd;
+
+// Updating the x, y and z variables with the entity coordinates
+x = coord.x;
+y = coord.y;
+z = coord.z;
+#endregion
+
+#region Sprite settings
 // Adjusting image speed according to entity speed
-image_speed = (max_image_speed * speed) / running_speed;
+image_speed = (max_image_spd * spd) / running_spd;
 
 // Setting the depth so farther objects are drawn behind
-depth = -y;
+depth = -coord.y;
+#endregion
