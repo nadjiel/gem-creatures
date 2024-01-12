@@ -18,16 +18,24 @@ function Controller(_controlled) constructor {
 		left: false,
 		down: false,
 		action1: {
-			hold: false
+			press: false,
+			hold: false,
+			release: false
 		},
 		action2: {
-			hold: false
+			press: false,
+			hold: false,
+			release: false
 		},
 		action3: {
-			hold: false
+			press: false,
+			hold: false,
+			release: false
 		},
 		action4: {
-			hold: false
+			press: false,
+			hold: false,
+			release: false
 		},
 		ctrl: false,
 		shift: false,
@@ -49,10 +57,18 @@ function Controller(_controlled) constructor {
 		input.up = keyboard_check(vk_up);
 		input.left = keyboard_check(vk_left);
 		input.down = keyboard_check(vk_down);
-		input.action1 = keyboard_check_pressed(ord("Z"));
-		input.action2 = keyboard_check_pressed(ord("X"));
-		input.action3 = keyboard_check_pressed(ord("A"));
-		input.action4 = keyboard_check_pressed(ord("S"));
+		input.action1.press = keyboard_check_pressed(ord("Z"));
+		input.action2.press = keyboard_check_pressed(ord("X"));
+		input.action3.press = keyboard_check_pressed(ord("A"));
+		input.action4.press = keyboard_check_pressed(ord("S"));
+		input.action1.hold = keyboard_check(ord("Z"));
+		input.action2.hold = keyboard_check(ord("X"));
+		input.action3.hold = keyboard_check(ord("A"));
+		input.action4.hold = keyboard_check(ord("S"));
+		input.action1.release = keyboard_check_released(ord("Z"));
+		input.action2.release = keyboard_check_released(ord("X"));
+		input.action3.release = keyboard_check_released(ord("A"));
+		input.action4.release = keyboard_check_released(ord("S"));
 		input.ctrl = keyboard_check(vk_control);
 		input.shift = keyboard_check(vk_shift);
 		input.space = keyboard_check_pressed(vk_space);

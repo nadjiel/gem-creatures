@@ -60,6 +60,7 @@
     {"id":{"name":"scr_constants","path":"scripts/scr_constants/scr_constants.yy",},},
     {"id":{"name":"spr_hero_walking_down","path":"sprites/spr_hero_walking_down/spr_hero_walking_down.yy",},},
     {"id":{"name":"obj_entity","path":"objects/obj_entity/obj_entity.yy",},},
+    {"id":{"name":"scr_aiming_state","path":"scripts/scr_aiming_state/scr_aiming_state.yy",},},
     {"id":{"name":"scr_attacking_state","path":"scripts/scr_attacking_state/scr_attacking_state.yy",},},
     {"id":{"name":"spr_bird_walking_up","path":"sprites/spr_bird_walking_up/spr_bird_walking_up.yy",},},
     {"id":{"name":"scr_global","path":"scripts/scr_global/scr_global.yy",},},
@@ -84,7 +85,7 @@
     {"id":{"name":"obj_character","path":"objects/obj_character/obj_character.yy",},},
     {"id":{"name":"spr_bird_walking_down","path":"sprites/spr_bird_walking_down/spr_bird_walking_down.yy",},},
     {"id":{"name":"spr_bird_walking_right","path":"sprites/spr_bird_walking_right/spr_bird_walking_right.yy",},},
-    {"id":{"name":"scr_controllable","path":"scripts/scr_controllable/scr_controllable.yy",},},
+    {"id":{"name":"scr_controller","path":"scripts/scr_controller/scr_controller.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
   ],
   "RoomOrderNodes": [

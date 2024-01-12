@@ -8,6 +8,14 @@ function seconds_to_miliseconds(_seconds) {
 }
 
 /**
+ * Returns the passed angle rounded to the nearest divisor of a right angle
+ * @returns the nearest right angle
+ */
+function round_angle(_angle) {
+	return round(_angle / 90) * 90;
+}
+
+/**
  * @desc Returns a string ("right", "up", "left" or "down") describing the passed angle
  * @param {Real} _angle an angle from 0 to 360
  * @returns {String} either "right", "up", "left" or "down"

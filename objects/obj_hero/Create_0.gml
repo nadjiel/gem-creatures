@@ -10,4 +10,4 @@ global.party = new Party(self);
 
 // Declaring some default actions for the hero
 // TODO: make them only doable with their items
-actions[0] = new BowAction();
+actions[0] = new BowAction(self);
