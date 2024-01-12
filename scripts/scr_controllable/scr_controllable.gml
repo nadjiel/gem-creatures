@@ -1,12 +1,15 @@
 /**
- * @desc Constructor for a struct that allows the user to control
- * a playable character that has it.
+ * @desc Constructor for a struct that allows the user to control a character that has it.
+ * @param {Id.Instance} _controlled the character that will be controlled by this Controller
  */
-function Controllable() constructor {
+function Controller(_controlled) constructor {
 	// Stores in what frame the step method was last executed
 	last_step = global.frame_counter;
 	// Stores in what frame the creature_collision method was last executed
 	last_creature_collision = global.frame_counter;
+	
+	// The character that is controlled by this controller
+	controlled = _controlled;
 	
 	// Input information
 	input = {
@@ -73,14 +76,14 @@ function Controllable() constructor {
 		check_input();
 		
 		// Executing state relative code with the input information
-		other.state.exec(input);
+		controlled.state.exec(input);
 		
 		// Assigns the number of the current frame to the last_step variable
 		last_step = global.frame_counter;
 	}
 	
 	/**
-	 * @desc Handles what happens when entity owner of this controllable collides with a creature
+	 * @desc Handles what happens when the controlled character collides with a creature
 	 */
 	static creature_collision = function() {
 		// Executes the following code only if it hasn't been executed in this frame yet

@@ -1,3 +1,3 @@
 /// @description Party joining
 
-if(controllable) controllable.creature_collision();
+if(controller) controller.creature_collision();
