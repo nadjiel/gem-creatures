@@ -1,4 +1,4 @@
-/// @description Default controllable
+/// @description Variable declarations
 
 event_inherited();
 

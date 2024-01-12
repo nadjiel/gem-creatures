@@ -2,6 +2,8 @@
 
 event_inherited();
 
+show_debug_message("dir: {0}, creator: {1}", dir, creator)
+
 // Destroys this instance if it is outside of the camera view
 var _camera_rectangle = get_camera_rectangle();
 if(!point_in_rectangle(

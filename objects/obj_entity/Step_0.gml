@@ -1,19 +1,6 @@
 /// @description Step event
 
 #region Speed calculations
-// Allows the user to control this entity, if it is controllable
-if(controllable) controllable.step();
-
-// Following leader, if any
-if(leader) {
-	if(point_distance(coord.x, coord.y, leader.coord.x, leader.coord.y) > TILE_SIZE) {
-		spd = leader.spd;
-		dir = point_direction(coord.x, coord.y, leader.coord.x, leader.coord.y);
-	} else {
-		spd = 0;
-	}
-}
-
 // Falling if in midair
 if(coord.z < 0) z_spd += falling_acc;
 // Colliding with the floor
@@ -40,9 +27,6 @@ z = coord.z;
 #endregion
 
 #region Sprite settings
-// Adjusting image speed according to entity speed
-image_speed = (max_image_spd * spd) / running_spd;
-
 // Setting the depth so farther objects are drawn behind
 depth = -coord.y;
 #endregion
