@@ -2,23 +2,21 @@
 
 #region Speed calculations
 // Falling if in midair
-if(coord.z < 0) z_spd += falling_acc;
+if(coord.z < 0) spds.z += falling_acc;
 // Colliding with the floor
-if(coord.z + z_spd >= 0) {
-	z_spd = 0;
+if(coord.z + spds.z >= 0) {
+	spds.z = 0;
 	coord.z = 0;
 }
 
 // Updating the x and y speeds based on the current entity speed and direction
-x_spd = lengthdir_x(spd, dir);
-y_spd = lengthdir_y(spd, dir);
+spds.x = lengthdir_x(spd, dir);
+spds.y = lengthdir_y(spd, dir);
 #endregion
 
 #region Coordinate incrementation
 // Incrementing the speeds into the axis
-coord.x += x_spd;
-coord.y += y_spd;
-coord.z += z_spd;
+coord.plus(spds);
 
 // Updating the x, y and z variables with the entity coordinates
 x = coord.x;

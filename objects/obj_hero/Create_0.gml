@@ -1,7 +1,5 @@
 /// @description Variable declarations
 
-event_inherited();
-
 // Making this player be controllable by default
 controllable = new Controllable();
 
@@ -9,5 +7,5 @@ controllable = new Controllable();
 global.party = new Party(self);
 
 // Declaring some default actions for the hero
-// These should be later doable only with their items
+// TODO: make them only doable with their items
 actions[0] = new BowAction();

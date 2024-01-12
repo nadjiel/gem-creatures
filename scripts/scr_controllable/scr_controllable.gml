@@ -115,7 +115,7 @@ function Controllable() constructor {
 		}
 
 		// Jumping if player is on the floor
-		if(other.coord.z == 0) other.z_spd = keys.space * -other.jumping_spd;
+		if(other.coord.z == 0) other.spds.z = keys.space * -other.jumping_spd;
 		
 		// Assigns the number of the current frame to the last_step variable
 		last_step = global.frame_counter;
