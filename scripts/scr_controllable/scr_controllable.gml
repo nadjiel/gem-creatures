@@ -1,5 +1,6 @@
 /**
- * @desc Constructor for a struct that allows the player to control an entity that has it.
+ * @desc Constructor for a struct that allows the user to control
+ * a playable character that has it.
  */
 function Controllable() constructor {
 	// Stores in what frame the step method was last executed
@@ -7,11 +8,8 @@ function Controllable() constructor {
 	// Stores in what frame the creature_collision method was last executed
 	last_creature_collision = global.frame_counter;
 	
-	// Stores when in miliseconds the last_party_swap occured
-	last_party_swap = current_time;
-	
-	// Keys that control the entity
-	keys = {
+	// Input information
+	input = {
 		right: false,
 		up: false,
 		left: false,
@@ -34,49 +32,34 @@ function Controllable() constructor {
 		one: false,
 		two: false,
 		three: false,
-		four: false
+		four: false,
+		x_input: 0,
+		y_input: 0,
+		dir_input: false
 	};
 	
-	// Input variables
-	x_input = 0;
-	y_input = 0;
-	dir_input = false;
-	
 	/**
-	 * @desc Checks which keys are being inputed by the user
+	 * @desc Checks the current input of the user
 	 */
-	static check_keys = function() {
-		keys.right = keyboard_check(vk_right);
-		keys.up = keyboard_check(vk_up);
-		keys.left = keyboard_check(vk_left);
-		keys.down = keyboard_check(vk_down);
-		keys.action1 = keyboard_check_pressed(ord("Z"));
-		keys.action2 = keyboard_check_pressed(ord("X"));
-		keys.action3 = keyboard_check_pressed(ord("A"));
-		keys.action4 = keyboard_check_pressed(ord("S"));
-		keys.ctrl = keyboard_check(vk_control);
-		keys.shift = keyboard_check(vk_shift);
-		keys.space = keyboard_check_pressed(vk_space);
-		keys.one = keyboard_check_pressed(ord("1"));
-		keys.two = keyboard_check_pressed(ord("2"));
-		keys.three = keyboard_check_pressed(ord("3"));
-		keys.four = keyboard_check_pressed(ord("4"));
-	}
-	
-	/**
-	 * @desc Executes a party swap if the input tells to do so and
-	 * the last party swap was executed at least half second ago
-	 */
-	static party_swap = function() {
-		if(current_time - last_party_swap <= seconds_to_miliseconds(0.5)) return;
-		if(!keys.one && !keys.two && !keys.three && !keys.four) return;
-		
-		last_party_swap = current_time;
-		
-		if(keys.one) return global.party.swap_leader(1);
-		if(keys.two) return global.party.swap_leader(2);
-		if(keys.three) return global.party.swap_leader(3);
-		if(keys.four) return global.party.swap_leader(4);
+	static check_input = function() {
+		input.right = keyboard_check(vk_right);
+		input.up = keyboard_check(vk_up);
+		input.left = keyboard_check(vk_left);
+		input.down = keyboard_check(vk_down);
+		input.action1 = keyboard_check_pressed(ord("Z"));
+		input.action2 = keyboard_check_pressed(ord("X"));
+		input.action3 = keyboard_check_pressed(ord("A"));
+		input.action4 = keyboard_check_pressed(ord("S"));
+		input.ctrl = keyboard_check(vk_control);
+		input.shift = keyboard_check(vk_shift);
+		input.space = keyboard_check_pressed(vk_space);
+		input.one = keyboard_check_pressed(ord("1"));
+		input.two = keyboard_check_pressed(ord("2"));
+		input.three = keyboard_check_pressed(ord("3"));
+		input.four = keyboard_check_pressed(ord("4"));
+		input.x_input = input.right - input.left;
+		input.y_input = input.down - input.up;
+		input.dir_input = abs(input.x_input) || abs(input.y_input);
 	}
 	
 	/**
@@ -86,36 +69,11 @@ function Controllable() constructor {
 		// Executes the following code only if it hasn't been executed in this frame yet
 		if(global.frame_counter == last_step) return;
 		
-		// Checking for key input
-		check_keys();
+		// Checking for user key input
+		check_input();
 		
-		// Tries to execute a party swap
-		party_swap();
-		
-		// Executes the action that the player wants, if it exists
-		if(keys.action1) {
-			if(other.actions[0]) {
-				other.actions[0].exec();
-			}
-		}
-
-		// Calculating x and y inputs
-		x_input = keys.right - keys.left;
-		y_input = keys.down - keys.up;
-		dir_input = abs(x_input) || abs(y_input);
-
-		// Calculating direction from input
-		if(dir_input) other.dir = point_direction(0, 0, x_input, y_input);
-
-		// Calculating speed based on input
-		other.spd = dir_input * other.walking_spd;
-		if(other.spd > 0) {
-			if(keys.ctrl) other.spd = other.running_spd;
-			if(keys.shift) other.spd = other.tiptoeing_spd;
-		}
-
-		// Jumping if player is on the floor
-		if(other.coord.z == 0) other.spds.z = keys.space * -other.jumping_spd;
+		// Executing state relative code with the input information
+		other.state.exec(input);
 		
 		// Assigns the number of the current frame to the last_step variable
 		last_step = global.frame_counter;

@@ -7,7 +7,7 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Creatures",
-    "path": "folders/Objects/Creatures.yy",
+    "path": "folders/Objects/Characters/Creatures.yy",
   },
   "parentObjectId": {
     "name": "obj_playable",
