@@ -7,9 +7,6 @@ function Controllable() constructor {
 	// Stores in what frame the creature_collision method was last executed
 	last_creature_collision = global.frame_counter;
 	
-	// Stores the party of this entity
-	party = new Party(other);
-	
 	// Stores when in miliseconds the last_party_swap occured
 	last_party_swap = current_time;
 	
@@ -19,6 +16,18 @@ function Controllable() constructor {
 		up: false,
 		left: false,
 		down: false,
+		action1: {
+			hold: false
+		},
+		action2: {
+			hold: false
+		},
+		action3: {
+			hold: false
+		},
+		action4: {
+			hold: false
+		},
 		ctrl: false,
 		shift: false,
 		space: false,
@@ -37,10 +46,14 @@ function Controllable() constructor {
 	 * @desc Checks which keys are being inputed by the user
 	 */
 	static check_keys = function() {
-		keys.right = keyboard_check(ord("D"));
-		keys.up = keyboard_check(ord("W"));
-		keys.left = keyboard_check(ord("A"));
-		keys.down = keyboard_check(ord("S"));
+		keys.right = keyboard_check(vk_right);
+		keys.up = keyboard_check(vk_up);
+		keys.left = keyboard_check(vk_left);
+		keys.down = keyboard_check(vk_down);
+		keys.action1 = keyboard_check_pressed(ord("Z"));
+		keys.action2 = keyboard_check_pressed(ord("X"));
+		keys.action3 = keyboard_check_pressed(ord("A"));
+		keys.action4 = keyboard_check_pressed(ord("S"));
 		keys.ctrl = keyboard_check(vk_control);
 		keys.shift = keyboard_check(vk_shift);
 		keys.space = keyboard_check_pressed(vk_space);
@@ -60,10 +73,10 @@ function Controllable() constructor {
 		
 		last_party_swap = current_time;
 		
-		if(keys.one) return party.swap_leader(1);
-		if(keys.two) return party.swap_leader(2);
-		if(keys.three) return party.swap_leader(3);
-		if(keys.four) return party.swap_leader(4);
+		if(keys.one) return global.party.swap_leader(1);
+		if(keys.two) return global.party.swap_leader(2);
+		if(keys.three) return global.party.swap_leader(3);
+		if(keys.four) return global.party.swap_leader(4);
 	}
 	
 	/**
@@ -78,6 +91,13 @@ function Controllable() constructor {
 		
 		// Tries to execute a party swap
 		party_swap();
+		
+		// Executes the action that the player wants, if it exists
+		if(keys.action1) {
+			if(other.actions[0]) {
+				other.actions[0].exec();
+			}
+		}
 
 		// Calculating x and y inputs
 		x_input = keys.right - keys.left;
@@ -109,8 +129,8 @@ function Controllable() constructor {
 		if(global.frame_counter == last_creature_collision) return;
 		
 		// Adds the collider creature to the party if the leader is the hero
-		if(object_get_name(party.leader.object_index) == "obj_hero") {
-			if(!party.contains(other)) party.add_follower(other);
+		if(object_get_name(global.party.leader.object_index) == "obj_hero") {
+			if(!global.party.contains(other)) global.party.add_follower(other);
 		}
 		
 		// Assigns the number of the current frame to the last_creature_collision variable

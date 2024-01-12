@@ -1,3 +1,3 @@
-/// @description Creature collision
+/// @description Party joining
 
 if(controllable) controllable.creature_collision();
