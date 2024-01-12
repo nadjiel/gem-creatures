@@ -13,37 +13,21 @@ function Controller(_controlled) constructor {
 	
 	// Input information
 	input = {
-		right: false,
-		up: false,
-		left: false,
-		down: false,
-		action1: {
-			press: false,
-			hold: false,
-			release: false
-		},
-		action2: {
-			press: false,
-			hold: false,
-			release: false
-		},
-		action3: {
-			press: false,
-			hold: false,
-			release: false
-		},
-		action4: {
-			press: false,
-			hold: false,
-			release: false
-		},
-		ctrl: false,
-		shift: false,
-		space: false,
-		one: false,
-		two: false,
-		three: false,
-		four: false,
+		right: new KeyInput(vk_right),
+		up: new KeyInput(vk_up),
+		left: new KeyInput(vk_left),
+		down: new KeyInput(vk_down),
+		action1: new KeyInput(ord("Z")),
+		action2: new KeyInput(ord("X")),
+		action3: new KeyInput(ord("A")),
+		action4: new KeyInput(ord("S")),
+		ctrl: new KeyInput(vk_control),
+		shift: new KeyInput(vk_shift),
+		space: new KeyInput(vk_space),
+		one: new KeyInput(ord("1")),
+		two: new KeyInput(ord("2")),
+		three: new KeyInput(ord("3")),
+		four: new KeyInput(ord("4")),
 		x_input: 0,
 		y_input: 0,
 		dir_input: false
@@ -53,31 +37,19 @@ function Controller(_controlled) constructor {
 	 * @desc Checks the current input of the user
 	 */
 	static check_input = function() {
-		input.right = keyboard_check(vk_right);
-		input.up = keyboard_check(vk_up);
-		input.left = keyboard_check(vk_left);
-		input.down = keyboard_check(vk_down);
-		input.action1.press = keyboard_check_pressed(ord("Z"));
-		input.action2.press = keyboard_check_pressed(ord("X"));
-		input.action3.press = keyboard_check_pressed(ord("A"));
-		input.action4.press = keyboard_check_pressed(ord("S"));
-		input.action1.hold = keyboard_check(ord("Z"));
-		input.action2.hold = keyboard_check(ord("X"));
-		input.action3.hold = keyboard_check(ord("A"));
-		input.action4.hold = keyboard_check(ord("S"));
-		input.action1.release = keyboard_check_released(ord("Z"));
-		input.action2.release = keyboard_check_released(ord("X"));
-		input.action3.release = keyboard_check_released(ord("A"));
-		input.action4.release = keyboard_check_released(ord("S"));
-		input.ctrl = keyboard_check(vk_control);
-		input.shift = keyboard_check(vk_shift);
-		input.space = keyboard_check_pressed(vk_space);
-		input.one = keyboard_check_pressed(ord("1"));
-		input.two = keyboard_check_pressed(ord("2"));
-		input.three = keyboard_check_pressed(ord("3"));
-		input.four = keyboard_check_pressed(ord("4"));
-		input.x_input = input.right - input.left;
-		input.y_input = input.down - input.up;
+		var _keys = variable_struct_get_names(input);
+		
+		for(var _i = 0; _i < array_length(_keys); _i++) {
+			var _key = _keys[_i];
+			var _value = input[$ _key];
+			
+			if(!is_instanceof(_value, KeyInput)) continue;
+			
+			_value.get_input();
+		}
+		
+		input.x_input = input.right.hold - input.left.hold;
+		input.y_input = input.down.hold - input.up.hold;
 		input.dir_input = abs(input.x_input) || abs(input.y_input);
 	}
 	

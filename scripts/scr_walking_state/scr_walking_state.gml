@@ -13,15 +13,18 @@ function WalkingState(_context) : State(_context) constructor {
 	 * there wasn't a last party swap
 	 */
 	static party_swap = function(_input) {
-		if(global.last_party_swap != 0 && current_time - global.last_party_swap <= seconds_to_miliseconds(0.5)) return;
-		if(!_input.one && !_input.two && !_input.three && !_input.four) return;
+		if(
+			global.last_party_swap != 0 &&
+			current_time - global.last_party_swap <= seconds_to_miliseconds(0.5)
+		) return;
+		if(!_input.one.press && !_input.two.press && !_input.three.press && !_input.four.press) return;
 		
 		global.last_party_swap = current_time;
 		
-		if(_input.one) return global.party.swap_leader(1);
-		if(_input.two) return global.party.swap_leader(2);
-		if(_input.three) return global.party.swap_leader(3);
-		if(_input.four) return global.party.swap_leader(4);
+		if(_input.one.press) return global.party.swap_leader(1);
+		if(_input.two.press) return global.party.swap_leader(2);
+		if(_input.three.press) return global.party.swap_leader(3);
+		if(_input.four.press) return global.party.swap_leader(4);
 	}
 	
 	/**
@@ -58,12 +61,12 @@ function WalkingState(_context) : State(_context) constructor {
 		// Calculating speed based on input
 		context.spd = _input.dir_input * context.walking_spd;
 		if(context.spd > 0) {
-			if(_input.ctrl) context.spd = context.running_spd;
-			if(_input.shift) context.spd = context.tiptoeing_spd;
+			if(_input.ctrl.hold) context.spd = context.running_spd;
+			if(_input.shift.hold) context.spd = context.tiptoeing_spd;
 		}
 
 		// Jumping if player is on the floor
-		if(context.coord.z == 0) context.spds.z = _input.space * -context.jumping_spd;
+		if(context.coord.z == 0) context.spds.z = _input.space.press * -context.jumping_spd;
 	}
 	
 }

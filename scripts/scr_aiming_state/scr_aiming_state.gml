@@ -26,7 +26,7 @@ function AimingState(_context) : State(_context) constructor {
 		context.spd = _input.dir_input * context.walking_spd / 2;
 
 		// Jumping if player is on the floor
-		if(context.coord.z == 0) context.spds.z = _input.space * -context.jumping_spd;
+		if(context.coord.z == 0) context.spds.z = _input.space.press * -context.jumping_spd;
 	}
 	
 }

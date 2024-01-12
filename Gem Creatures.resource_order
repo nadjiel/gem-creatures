@@ -40,6 +40,7 @@
     {"name":"scr_constants","order":2,"path":"scripts/scr_constants/scr_constants.yy",},
     {"name":"spr_hero_walking_down","order":2,"path":"sprites/spr_hero_walking_down/spr_hero_walking_down.yy",},
     {"name":"obj_entity","order":1,"path":"objects/obj_entity/obj_entity.yy",},
+    {"name":"scr_key_input","order":12,"path":"scripts/scr_key_input/scr_key_input.yy",},
     {"name":"scr_aiming_state","order":3,"path":"scripts/scr_aiming_state/scr_aiming_state.yy",},
     {"name":"scr_attacking_state","order":2,"path":"scripts/scr_attacking_state/scr_attacking_state.yy",},
     {"name":"spr_bird_walking_up","order":1,"path":"sprites/spr_bird_walking_up/spr_bird_walking_up.yy",},

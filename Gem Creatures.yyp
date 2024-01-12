@@ -60,6 +60,7 @@
     {"id":{"name":"scr_constants","path":"scripts/scr_constants/scr_constants.yy",},},
     {"id":{"name":"spr_hero_walking_down","path":"sprites/spr_hero_walking_down/spr_hero_walking_down.yy",},},
     {"id":{"name":"obj_entity","path":"objects/obj_entity/obj_entity.yy",},},
+    {"id":{"name":"scr_key_input","path":"scripts/scr_key_input/scr_key_input.yy",},},
     {"id":{"name":"scr_aiming_state","path":"scripts/scr_aiming_state/scr_aiming_state.yy",},},
     {"id":{"name":"scr_attacking_state","path":"scripts/scr_attacking_state/scr_attacking_state.yy",},},
     {"id":{"name":"spr_bird_walking_up","path":"sprites/spr_bird_walking_up/spr_bird_walking_up.yy",},},
