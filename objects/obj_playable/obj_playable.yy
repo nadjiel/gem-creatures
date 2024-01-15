@@ -1,10 +1,11 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "obj_hero",
+  "name": "obj_playable",
   "eventList": [
-    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
     {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":3,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":{"name":"obj_creature","path":"objects/obj_creature/obj_creature.yy",},"eventNum":0,"eventType":4,"isDnD":false,},
+    {"resourceType":"GMEvent","resourceVersion":"1.0","name":"","collisionObjectId":null,"eventNum":0,"eventType":0,"isDnD":false,},
   ],
   "managed": true,
   "overriddenProperties": [],
@@ -13,8 +14,8 @@
     "path": "folders/Objects/Characters.yy",
   },
   "parentObjectId": {
-    "name": "obj_playable",
-    "path": "objects/obj_playable/obj_playable.yy",
+    "name": "obj_character",
+    "path": "objects/obj_character/obj_character.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
@@ -29,12 +30,11 @@
   "physicsShape": 1,
   "physicsShapePoints": [],
   "physicsStartAwake": true,
-  "properties": [],
+  "properties": [
+    {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"controller","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"undefined","varType":4,},
+  ],
   "solid": false,
-  "spriteId": {
-    "name": "spr_hero_walking_down",
-    "path": "sprites/spr_hero_walking_down/spr_hero_walking_down.yy",
-  },
+  "spriteId": null,
   "spriteMaskId": null,
   "visible": true,
 }

@@ -2,4 +2,4 @@
 
 event_inherited();
 
-pick_sprite_direction("spr_bird_walking", direction);
+pick_sprite_direction("spr_bird_walking", dir);

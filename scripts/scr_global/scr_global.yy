@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_controllable",
+  "name": "scr_global",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

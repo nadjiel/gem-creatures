@@ -1,6 +1,6 @@
 /**
- * @desc Constructor to a party struct. Note that the party is always held by the controllable
- *     and the controllable is always held by the party leader.
+ * @desc Constructor to a party struct that helps managing characters' order
+ * @param {Id.Instance} _leader the character that will lead the party
  */
 function Party(_leader) constructor {
 	
@@ -98,7 +98,7 @@ function Party(_leader) constructor {
 
 	/**
 	 * @desc Adds a new leader to the party, if it isn't full.
-	 *     The new leader gets the controllable from the former leader
+	 * The new leader gets the controller from the former leader
 	 * @param {Id.Instance} _new_leader the member that will lead the party
 	 */
 	static add_leader = function(_new_leader) {
@@ -114,9 +114,11 @@ function Party(_leader) constructor {
 		_former_leader.leader = _new_leader;
 		_new_leader.follower = _former_leader;
 	
-		// Passes the controllable from the former leader to the new leader
-		_new_leader.controllable = _former_leader.controllable;
-		_former_leader.controllable = 0;
+		// Passes the controller from the former leader to the new leader
+		_new_leader.controller = _former_leader.controller;
+		// Assigns the new leader as the instance to be controlled by the controller
+		_new_leader.controller.controlled = _new_leader;
+		_former_leader.controller = 0;
 	}
 
 	/**
@@ -176,9 +178,9 @@ function Party(_leader) constructor {
 
 	/**
 	 * @desc Removes the leader of the party and passes the leadership to its direct follower
-	 *     if the party has more than one members.
-	 *     Also returns the removed leader or noone, if no remotion occurred.
-	 *     The new leader gets the controllable from the former leader
+	 * if the party has more than one members.
+	 * Also returns the removed leader or noone, if no remotion occurred.
+	 * The new leader gets the controller from the former leader
 	 * @returns {Id.Instance} the former leader of the party or noone,
 	 *     if the remotion hasn't succeded
 	 */
@@ -196,9 +198,11 @@ function Party(_leader) constructor {
 		_former_leader.follower = noone;
 		_new_leader.leader = noone;
 	
-		// Passes the controllable from the former leader to the new leader
-		_new_leader.controllable = _former_leader.controllable;
-		_former_leader.controllable = 0;
+		// Passes the controller from the former leader to the new leader
+		_new_leader.controller = _former_leader.controller;
+		// Assigns the new leader as the instance to be controlled by the controller
+		_new_leader.controller.controlled = _new_leader;
+		_former_leader.controller = 0;
 		
 		return _former_leader;
 	}

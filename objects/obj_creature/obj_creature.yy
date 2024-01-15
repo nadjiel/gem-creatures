@@ -7,11 +7,11 @@
   "overriddenProperties": [],
   "parent": {
     "name": "Creatures",
-    "path": "folders/Objects/Creatures.yy",
+    "path": "folders/Objects/Characters/Creatures.yy",
   },
   "parentObjectId": {
-    "name": "obj_entity",
-    "path": "objects/obj_entity/obj_entity.yy",
+    "name": "obj_playable",
+    "path": "objects/obj_playable/obj_playable.yy",
   },
   "persistent": false,
   "physicsAngularDamping": 0.1,
