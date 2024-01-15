@@ -16,6 +16,7 @@ function entity_collision() {
 	
 	if(_collider == noone) return;
 	if(_collider == creator) return;
+	if(_collider.creator == creator) return;
 	if(global.party.contains(creator) && global.party.contains(_collider)) return;
 	
 	instance_destroy(_collider);

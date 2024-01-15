@@ -43,7 +43,7 @@ function WalkingState(_context) : State(_context) constructor {
 		}
 		if(_input.action1.hold) {
 			if(context.actions[0]) {
-				context.actions[0].hold();
+				context.actions[0].charge();
 			}
 		}
 		if(_input.action1.release) {
