@@ -16,7 +16,7 @@ function BowAction(_self) : Action(_self) constructor {
 	}
 	
 	static hold = function() {
-		actor.state.change(actor.states.aiming);
+		actor.aiming = true;
 	}
 	
 	static release = function() {
@@ -32,7 +32,7 @@ function BowAction(_self) : Action(_self) constructor {
 		);
 		
 		actor.dir = actor.facing_dir;
-		actor.state.change(actor.states.walking);
+		actor.aiming = false;
 	}
 	
 }

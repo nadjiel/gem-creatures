@@ -12,5 +12,8 @@ if(leader) {
 	}
 }
 
+// Calculating direction to which face with the direction
+if(!aiming) facing_dir = round_angle(dir);
+
 // Adjusting image speed according to entity speed
 image_speed = (max_image_spd * spd) / running_spd;

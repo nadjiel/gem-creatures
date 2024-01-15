@@ -33,7 +33,7 @@ function WalkingState(_context) : State(_context) constructor {
 	 */
 	static exec = function(_input) {
 		// Tries to execute a party swap
-		party_swap(_input);
+		if(!context.aiming) party_swap(_input);
 		
 		// Executes the action that the player wants, if it exists
 		if(_input.action1.press) {
@@ -54,15 +54,13 @@ function WalkingState(_context) : State(_context) constructor {
 
 		// Calculating direction from input
 		if(_input.dir_input) context.dir = point_direction(0, 0, _input.x_input, _input.y_input);
-		
-		// Calculating direction to which face with the direction
-		context.facing_dir = round_angle(context.dir);
 
 		// Calculating speed based on input
 		context.spd = _input.dir_input * context.walking_spd;
 		if(context.spd > 0) {
 			if(_input.ctrl.hold) context.spd = context.running_spd;
 			if(_input.shift.hold) context.spd = context.tiptoeing_spd;
+			if(context.aiming) context.spd = context.aiming_spd;
 		}
 
 		// Jumping if player is on the floor
