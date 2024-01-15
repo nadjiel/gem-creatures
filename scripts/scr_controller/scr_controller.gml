@@ -37,6 +37,7 @@ function Controller(_controlled) constructor {
 	 * @desc Checks the current input of the user
 	 */
 	static check_input = function() {
+		// Getting input for every key
 		var _keys = variable_struct_get_names(input);
 		
 		for(var _i = 0; _i < array_length(_keys); _i++) {
@@ -48,6 +49,7 @@ function Controller(_controlled) constructor {
 			_value.get_input();
 		}
 		
+		// Calculating input based values
 		input.x_input = input.right.hold - input.left.hold;
 		input.y_input = input.down.hold - input.up.hold;
 		input.dir_input = abs(input.x_input) || abs(input.y_input);
