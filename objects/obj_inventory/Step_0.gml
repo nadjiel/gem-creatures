@@ -9,6 +9,9 @@ keys.down = keyboard_check_pressed(vk_down);
 input_x = keys.right - keys.left;
 input_y = keys.down - keys.up;
 
-if(keys.enter) opened = !opened;
+if(keys.enter) {
+	opened = !opened;
+	global.pause = !global.pause;
+}
 
 move_cursor();

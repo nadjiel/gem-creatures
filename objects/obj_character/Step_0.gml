@@ -1,5 +1,7 @@
 /// @description Step event
 
+if(global.pause) exit;
+
 event_inherited();
 
 // Following leader, if any
