@@ -9,7 +9,7 @@ if(opened) {
 		menu_y,
 		width / sprite_get_width(spr_inventory_bg),
 		height / sprite_get_height(spr_inventory_bg),
-		0, c_white, .5
+		0, c_white, 1
 	);
 	
 	// Draw inventory items
@@ -40,6 +40,15 @@ if(opened) {
 		);
 		
 		// Draw amount of the item
+		draw_set_font(global.font);
+		draw_set_color(c_black);
+		draw_set_halign(fa_right);
+		draw_set_valign(fa_bottom);
+		draw_text(
+			_x + column_size - TILE_SIZE * 0.25,
+			_y + row_size,
+			content.items[_i].amount
+		);
 		
 		// Increment drawing position
 		_x += column_size + x_gap;

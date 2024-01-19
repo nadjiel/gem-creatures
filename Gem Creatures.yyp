@@ -95,6 +95,7 @@
     {"id":{"name":"scr_walking_state","path":"scripts/scr_walking_state/scr_walking_state.yy",},},
     {"id":{"name":"spr_honeycomb","path":"sprites/spr_honeycomb/spr_honeycomb.yy",},},
     {"id":{"name":"spr_dragon_walking_down","path":"sprites/spr_dragon_walking_down/spr_dragon_walking_down.yy",},},
+    {"id":{"name":"spr_font","path":"sprites/spr_font/spr_font.yy",},},
     {"id":{"name":"spr_dragon_walking_right","path":"sprites/spr_dragon_walking_right/spr_dragon_walking_right.yy",},},
     {"id":{"name":"obj_inventory","path":"objects/obj_inventory/obj_inventory.yy",},},
     {"id":{"name":"obj_creature","path":"objects/obj_creature/obj_creature.yy",},},

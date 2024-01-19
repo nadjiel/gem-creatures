@@ -39,6 +39,7 @@ function draw_origin(_color = c_white) {
  * @desc Shows information about the game window and other visual aspects
  */
 function show_game_size_info() {
+	draw_set_font(global.font);
 	draw_set_halign(fa_right);
 	
 	draw_text(display_get_gui_width(), 0,

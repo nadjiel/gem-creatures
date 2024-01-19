@@ -11,10 +11,7 @@ keys = {
 };
 input_x = 0;
 input_y = 0;
-/*
-items = [];
-selected_slot = 0;
-*/
+
 content = new Inventory();
 
 gui_width = display_get_gui_width();
@@ -33,25 +30,6 @@ y_padding = TILE_SIZE / 2;
 width = x_padding * 2 + columns * column_size + x_gap * (columns - 1);
 height = gui_height - menu_y;
 
-/**
- * @desc Adds an item to the inventory
- * @param {String} _name the name of the item to add
- *//*
-add_item = function(_name) {
-	var _i = array_find_index(items, method({ name: _name }, function(_slot) {
-		return _slot.item.name == name;
-	}));
-	
-	if(_i == -1) {
-		array_insert(items, 0, new Slot(create_item(_name)));
-		array_first(items).amount++;
-		
-		return;
-	};
-	
-	items[_i].amount++;
-}
-*/
 move_cursor = function() {
 	if(!opened) return;
 	if(array_length(content.items) == 0) return;
