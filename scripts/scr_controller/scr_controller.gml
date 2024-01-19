@@ -101,7 +101,7 @@ function Controller(_controlled) constructor {
 		var _collectible_name = string_replace(object_get_name(other.object_index), "obj_", "");
 		
 		// Adds the to the collectible amount in the inventory
-		obj_inventory.add_item(_collectible_name);
+		obj_inventory.content.add_item(_collectible_name);
 		
 		// Destroys the collected instance
 		instance_destroy(other);

@@ -15,12 +15,12 @@ if(opened) {
 	// Draw inventory items
 	var _x = menu_x + x_padding;
 	var _y = menu_y + y_padding;
-	for(var _i = 0; _i < array_length(items); _i++) {
+	for(var _i = 0; _i < array_length(content.items); _i++) {
 		// If there's 0 of this item, skip it
-		if(items[_i].amount == 0) continue;
+		if(content.items[_i].amount == 0) continue;
 		
 		// Draw cursor if item is selected
-		if(selected_slot == _i) {
+		if(content.selected == _i) {
 			draw_sprite_ext(
 				spr_inventory_cursor, 0,
 				_x, _y,
@@ -31,7 +31,7 @@ if(opened) {
 		}
 		
 		// Draw item
-		var _item_sprite = items[_i].item.sprite;
+		var _item_sprite = content.items[_i].item.sprite;
 		draw_sprite(
 			_item_sprite,
 			0,
