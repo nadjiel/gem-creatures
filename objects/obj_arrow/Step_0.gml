@@ -1,5 +1,7 @@
 /// @description Collision and angle
 
+if(global.pause) exit;
+
 event_inherited();
 
 // Destroys this instance if it is outside of the camera view

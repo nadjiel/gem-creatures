@@ -1,5 +1,7 @@
 /// @description Step event
 
+if(global.pause) exit;
+
 #region Speed calculations
 // Falling if in midair
 if(coord.z < 0) spds.z += falling_acc;

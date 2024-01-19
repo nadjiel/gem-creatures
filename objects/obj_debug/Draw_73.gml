@@ -5,6 +5,7 @@ if(debug) {
 	with(all) {
 		if(self.id == other.id) continue;
 		
+		draw_origin();
 		draw_bbox();
 	}
 }
