@@ -13,6 +13,7 @@
     {"name":"Rooms","order":10,"path":"folders/Rooms.yy",},
     {"name":"Scripts","order":5,"path":"folders/Scripts.yy",},
     {"name":"Actions","order":7,"path":"folders/Scripts/Actions.yy",},
+    {"name":"Items","order":13,"path":"folders/Scripts/Items.yy",},
     {"name":"States","order":9,"path":"folders/Scripts/States.yy",},
     {"name":"Sequences","order":11,"path":"folders/Sequences.yy",},
     {"name":"Shaders","order":6,"path":"folders/Shaders.yy",},
@@ -28,7 +29,6 @@
     {"name":"Items","order":5,"path":"folders/Sprites/Items.yy",},
     {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
-    {"name":"Items","order":13,"path":"folders/Scripts/Items.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"obj_hero","order":2,"path":"objects/obj_hero/obj_hero.yy",},

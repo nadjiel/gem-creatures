@@ -11,4 +11,28 @@ input_y = keys.down - keys.up;
 
 if(keys.enter) opened = !opened;
 
-selected_slot += input_x;
+move_cursor = function() {
+	if(!opened) return;
+	if(array_length(items) == 0) return;
+	
+	var _total_rows = ceil(array_length(items) / columns);
+	
+	var _row = selected_slot div columns;
+	var _column = selected_slot mod columns;
+	
+	show_debug_message("{0} {1} {2}", _row * columns + _column, _row, _column)
+	
+	selected_slot += input_x;
+	if(selected_slot == -1) selected_slot = array_length(items) - 1;
+	if(selected_slot == array_length(items)) selected_slot = 0;
+	
+	selected_slot += input_y * columns;
+	if(selected_slot < 0) {
+		selected_slot = (_total_rows - 1) * columns + _column;
+		if(selected_slot > array_length(items) - 1) selected_slot -= columns;
+	}
+	if(selected_slot > array_length(items) -1) selected_slot = _column;
+	
+}
+
+move_cursor();
