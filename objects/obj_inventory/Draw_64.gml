@@ -3,11 +3,11 @@
 // Draw inventory, if opened
 if(opened) {
 	// Inventory background
-	draw_sprite_stretched(spr_inventory_bg, 0, menu_x, menu_y, width, display_get_gui_height());
+	draw_sprite_stretched(spr_inventory_bg, 0, x, y, width, display_get_gui_height());
 	
 	// Draw inventory items
-	var _x = menu_x + x_padding;
-	var _y = menu_y + y_padding;
+	var _x = x + x_padding;
+	var _y = y + y_padding;
 	for(var _i = 0; _i < array_length(content.items); _i++) {
 		// If there's 0 of this item, skip it
 		if(content.items[_i].amount == 0) continue;
@@ -44,9 +44,9 @@ if(opened) {
 		
 		// Increment drawing position
 		_x += column_size + x_gap;
-		if(_x > menu_x + width - x_padding - column_size) {
+		if(_x > x + width - x_padding - column_size) {
 			_y += row_size + y_gap;
-			_x = menu_x + x_padding;
+			_x = x + x_padding;
 		}
 	}
 }

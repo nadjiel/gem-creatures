@@ -29,6 +29,7 @@
     {"name":"Items","order":5,"path":"folders/Sprites/Items.yy",},
     {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
+    {"name":"Interface","order":11,"path":"folders/Objects/Interface.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"obj_hero","order":2,"path":"objects/obj_hero/obj_hero.yy",},
@@ -43,6 +44,7 @@
     {"name":"spr_mouse_walking_right","order":1,"path":"sprites/spr_mouse_walking_right/spr_mouse_walking_right.yy",},
     {"name":"spr_bg","order":3,"path":"sprites/spr_bg/spr_bg.yy",},
     {"name":"spr_inventory_bg","order":7,"path":"sprites/spr_inventory_bg/spr_inventory_bg.yy",},
+    {"name":"spr_popup_bg","order":10,"path":"sprites/spr_popup_bg/spr_popup_bg.yy",},
     {"name":"scr_banana_item","order":1,"path":"scripts/scr_banana_item/scr_banana_item.yy",},
     {"name":"obj_arrow","order":4,"path":"objects/obj_arrow/obj_arrow.yy",},
     {"name":"obj_ball","order":3,"path":"objects/obj_ball/obj_ball.yy",},
@@ -69,7 +71,7 @@
     {"name":"spr_honeycomb","order":2,"path":"sprites/spr_honeycomb/spr_honeycomb.yy",},
     {"name":"spr_dragon_walking_down","order":2,"path":"sprites/spr_dragon_walking_down/spr_dragon_walking_down.yy",},
     {"name":"spr_font","order":9,"path":"sprites/spr_font/spr_font.yy",},
-    {"name":"obj_inventory","order":9,"path":"objects/obj_inventory/obj_inventory.yy",},
+    {"name":"obj_popup","order":1,"path":"objects/obj_popup/obj_popup.yy",},
     {"name":"obj_creature","order":1,"path":"objects/obj_creature/obj_creature.yy",},
     {"name":"obj_playable","order":1,"path":"objects/obj_playable/obj_playable.yy",},
     {"name":"spr_mouse_walking_up","order":2,"path":"sprites/spr_mouse_walking_up/spr_mouse_walking_up.yy",},
@@ -84,6 +86,7 @@
     {"name":"obj_mushroom","order":2,"path":"objects/obj_mushroom/obj_mushroom.yy",},
     {"name":"spr_ball_walking_up","order":1,"path":"sprites/spr_ball_walking_up/spr_ball_walking_up.yy",},
     {"name":"spr_bird_walking_down","order":2,"path":"sprites/spr_bird_walking_down/spr_bird_walking_down.yy",},
+    {"name":"spr_popup_cursor","order":11,"path":"sprites/spr_popup_cursor/spr_popup_cursor.yy",},
     {"name":"scr_controller","order":3,"path":"scripts/scr_controller/scr_controller.yy",},
   ],
 }
