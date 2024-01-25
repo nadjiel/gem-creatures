@@ -1,22 +1,16 @@
 /// @description Variable declarations
 
+// Input variables
 opened = false;
 
 keys = {
-	enter: false,
-	right: false,
-	up: false,
-	left: false,
-	down: false
+	enter: false
 };
-input_x = 0;
-input_y = 0;
 
+// Inventory content
 content = new Inventory();
 
-gui_width = display_get_gui_width();
-gui_height = display_get_gui_height();
-
+// GUI variables
 menu_x = 0;
 menu_y = 0;
 rows = undefined;
@@ -28,28 +22,34 @@ y_gap = TILE_SIZE * 0.25;
 x_padding = TILE_SIZE / 2;
 y_padding = TILE_SIZE / 2;
 width = x_padding * 2 + columns * column_size + x_gap * (columns - 1);
-height = gui_height - menu_y;
+// WARNING: This uses the unupdated GUI height
+height = display_get_gui_height() - menu_y;
 
+/**
+ * @desc Updates the selected item via mouse hovering
+ */
 move_cursor = function() {
 	if(!opened) return;
 	if(array_length(content.items) == 0) return;
+	if(!point_in_rectangle(
+		device_mouse_x_to_gui(0), device_mouse_y_to_gui(0),
+		menu_x + x_padding, menu_y + y_padding,
+		menu_x + width - x_padding, menu_y + display_get_gui_height() - y_padding
+	)) return;
 	
-	var _total_rows = ceil(array_length(content.items) / columns);
-	
-	var _row = content.selected div columns;
-	var _column = content.selected mod columns;
-	
-	show_debug_message("{0} {1} {2}", _row * columns + _column, _row, _column)
-	
-	content.selected += input_x;
-	if(content.selected == -1) content.selected = array_length(content.items) - 1;
-	if(content.selected == array_length(content.items)) content.selected = 0;
-	
-	content.selected += input_y * columns;
-	if(content.selected < 0) {
-		content.selected = (_total_rows - 1) * columns + _column;
-		if(content.selected > array_length(content.items) - 1) content.selected -= columns;
+	for(var _i = 0; _i < array_length(content.items); _i++) {
+		var _row = _i div columns;
+		var _column = _i mod columns;
+		
+		var _x = menu_x + x_padding + x_gap * _column + column_size * _column;
+		var _y = menu_y + y_padding + y_gap * _row + row_size * _row;
+		
+		if(!point_in_rectangle(
+			device_mouse_x_to_gui(0), device_mouse_y_to_gui(0),
+			_x, _y,
+			_x + column_size, _y + row_size
+		)) continue;
+		
+		content.selected = _i;
 	}
-	if(content.selected > array_length(content.items) -1) content.selected = _column;
-	
 }
