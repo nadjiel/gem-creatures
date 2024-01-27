@@ -1,11 +1,11 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "scr_key_input",
+  "name": "scr_input",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Scripts",
-    "path": "folders/Scripts.yy",
+    "name": "Input",
+    "path": "folders/Scripts/Input.yy",
   },
 }

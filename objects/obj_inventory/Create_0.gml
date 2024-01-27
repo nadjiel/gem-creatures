@@ -3,12 +3,6 @@
 // Inventory state
 opened = false;
 
-// Input variables
-keys = {
-	enter: false,
-	confirm: false
-};
-
 // Inventory content
 content = new Inventory();
 
@@ -63,7 +57,7 @@ move_cursor = function() {
 		content.selected = _i;
 		
 		// Opens item popup
-		if(keys.confirm) {
+		if(obj_input.keys.left_mouse.press) {
 			instance_create_layer(
 				_mouse_position.x, _mouse_position.y,
 				"Instances", obj_popup,

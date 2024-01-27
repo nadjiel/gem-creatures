@@ -1,10 +1,5 @@
 /// @description Variable definitions
 
-// Input variables
-keys = {
-	confirm: false
-};
-
 // Options available
 options = [
 	{ text: "Use", callback: function(){} },
@@ -55,7 +50,7 @@ move_cursor = function() {
 		_mouse_position.x, _mouse_position.y,
 		x + x_padding, y + y_padding,
 		x + width - x_padding, y + height - y_padding
-	) && keys.confirm) {
+	) && obj_input.keys.left_mouse.press) {
 		// Calls the "Cancel" callback
 		array_last(options).callback();
 		return;
@@ -79,6 +74,6 @@ move_cursor = function() {
 		selected = _i;
 		
 		// Calls the callback corresponding to the option clicked
-		if(keys.confirm) options[_i].callback();
+		if(obj_input.keys.left_mouse.press) options[_i].callback();
 	}
 }
