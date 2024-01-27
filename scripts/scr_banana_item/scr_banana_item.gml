@@ -5,5 +5,6 @@ function BananaItem(): Item() constructor {
 	
 	name = "banana";
 	sprite = spr_banana;
+	heal = 3;
 	
 }

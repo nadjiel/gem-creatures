@@ -1,17 +1,11 @@
 /// @description Inventory management
 
-keys.enter = keyboard_check_pressed(vk_enter);
-keys.right = keyboard_check_pressed(vk_right);
-keys.up = keyboard_check_pressed(vk_up);
-keys.left = keyboard_check_pressed(vk_left);
-keys.down = keyboard_check_pressed(vk_down);
-
-input_x = keys.right - keys.left;
-input_y = keys.down - keys.up;
-
-if(keys.enter) {
-	opened = !opened;
-	global.pause = !global.pause;
+// Responding to input
+if(focused) {
+	if(obj_input.keys.enter.press) {
+		opened = !opened;
+		global.pause = !global.pause;
+	}
+	
+	move_cursor();
 }
-
-move_cursor();

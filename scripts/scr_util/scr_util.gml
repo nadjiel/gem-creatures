@@ -48,7 +48,7 @@ function pick_sprite_direction(_sprite_name, _angle) {
 }
 
 /**
- * Constructs a rectangle struct with information about its top left and bottom right axis
+ * @desc Constructs a rectangle struct with information about its top left and bottom right axis
  * @param {Real} _x1 the top left corner x coordinate
  * @param {Real} _y1 the top left corner y coordinate
  * @param {Real} _x2 the bottom right corner x coordinate
@@ -62,7 +62,7 @@ function Rectangle(_x1, _y1, _x2, _y2) constructor {
 }
 
 /**
- * Returns a rectangle representing where the camera is currently located
+ * @desc Returns a rectangle representing where the camera is currently located
  * @returns {Struct.Rectangle} a rectangle representing the camera location
  */
 function get_camera_rectangle() {
@@ -73,5 +73,19 @@ function get_camera_rectangle() {
 	
 	return new Rectangle(
 		_x, _y, _x + _width, _y + _height
+	);
+}
+
+/**
+ * @desc Draws a sprite from its top left instead of its origin
+ * @param {Asset.GMSprite} _sprite the index of the sprite to draw
+ * @param {Real} _subimage the sub-image (frame) of the sprite to draw (image_index or -1 correlate to the current frame of animation in the object)
+ * @param {Real} _x the x coordinate of where to draw the sprite
+ * @param {Real} _y the y coordinate of where to draw the sprite
+ */
+function draw_sprite_from_top_left(_sprite, _subimage, _x, _y) {
+	draw_sprite(
+		_sprite, _subimage,
+		_x + sprite_get_xoffset(_sprite), _y + sprite_get_yoffset(_sprite)
 	);
 }

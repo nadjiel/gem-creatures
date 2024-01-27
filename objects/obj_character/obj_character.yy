@@ -38,6 +38,8 @@
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"leader","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"noone","varType":5,},
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"follower","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"noone","varType":5,},
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"actions","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"array_create(4, undefined)","varType":4,},
+    {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"hp","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"10","varType":0,},
+    {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"max_hp","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"10","varType":0,},
     {"resourceType":"GMObjectProperty","resourceVersion":"1.0","name":"aiming","filters":[],"listItems":[],"multiselect":false,"rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"value":"False","varType":3,},
   ],
   "solid": false,
