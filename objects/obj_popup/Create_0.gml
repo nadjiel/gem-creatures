@@ -1,10 +1,15 @@
 /// @description Variable definitions
 
+function blur() {
+	obj_inventory.focused = true;
+	instance_destroy(obj_popup);
+}
+
 // Options available
 options = [
-	{ text: "Use", callback: function(){} },
+	{ text: "Use", slot, blur, callback: function() { obj_inventory.content.remove_item(slot.item); blur(); } },
 	{ text: "Hold", callback: function(){} },
-	{ text: "Cancel", callback: function() { obj_inventory.focused = true; instance_destroy(obj_popup); } }
+	{ text: "Cancel", callback: blur }
 ];
 
 /**

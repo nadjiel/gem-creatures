@@ -51,6 +51,7 @@
   },
   "resources": [
     {"id":{"name":"obj_hero","path":"objects/obj_hero/obj_hero.yy",},},
+    {"id":{"name":"obj_gui","path":"objects/obj_gui/obj_gui.yy",},},
     {"id":{"name":"scr_item_factory","path":"scripts/scr_item_factory/scr_item_factory.yy",},},
     {"id":{"name":"scr_debug","path":"scripts/scr_debug/scr_debug.yy",},},
     {"id":{"name":"spr_ball_walking_right","path":"sprites/spr_ball_walking_right/spr_ball_walking_right.yy",},},
@@ -107,6 +108,7 @@
     {"id":{"name":"spr_dragon_walking_right","path":"sprites/spr_dragon_walking_right/spr_dragon_walking_right.yy",},},
     {"id":{"name":"obj_inventory","path":"objects/obj_inventory/obj_inventory.yy",},},
     {"id":{"name":"obj_creature","path":"objects/obj_creature/obj_creature.yy",},},
+    {"id":{"name":"spr_gui","path":"sprites/spr_gui/spr_gui.yy",},},
     {"id":{"name":"obj_playable","path":"objects/obj_playable/obj_playable.yy",},},
     {"id":{"name":"spr_mouse_walking_up","path":"sprites/spr_mouse_walking_up/spr_mouse_walking_up.yy",},},
     {"id":{"name":"scr_vector3","path":"scripts/scr_vector3/scr_vector3.yy",},},

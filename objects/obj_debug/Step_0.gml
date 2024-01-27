@@ -18,5 +18,7 @@ if(obj_input.keys.f4.hold && mouse_wheel_down()) { view_wport[0] *= 2; view_hpor
 if(obj_input.keys.f5.hold && mouse_wheel_up()) camera_set_view_size(view_camera[0], camera_get_view_width(view_camera[0]) / 2, camera_get_view_height(view_camera[0]) / 2);
 if(obj_input.keys.f5.hold && mouse_wheel_down()) camera_set_view_size(view_camera[0], camera_get_view_width(view_camera[0]) * 2, camera_get_view_height(view_camera[0]) * 2);
 
+if(obj_input.keys.f6.press) global.party.leader.hp -= 7;
+
 // Toggling debug mode
 if(obj_input.keys.f1.press) debug = !debug;

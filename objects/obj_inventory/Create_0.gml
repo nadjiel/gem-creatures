@@ -64,7 +64,8 @@ move_cursor = function() {
 				{
 					x: _mouse_position.x,
 					y: _mouse_position.y,
-					focused: true
+					focused: true,
+					slot: content.items[_i]
 				}
 			);
 			focused = false;

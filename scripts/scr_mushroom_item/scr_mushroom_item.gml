@@ -5,5 +5,6 @@ function MushroomItem(): Item() constructor {
 	
 	name = "mushroom";
 	sprite = spr_mushroom;
+	heal = 0.5;
 	
 }

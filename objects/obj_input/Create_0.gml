@@ -7,6 +7,7 @@ keys = {
 	f3: new KeyboardInput(vk_f3),
 	f4: new KeyboardInput(vk_f4),
 	f5: new KeyboardInput(vk_f5),
+	f6: new KeyboardInput(vk_f6),
 	enter: new KeyboardInput(vk_enter),
 	left_mouse: new MouseInput(mb_left),
 	right: new KeyboardInput(vk_right),
