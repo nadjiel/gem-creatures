@@ -89,3 +89,30 @@ function draw_sprite_from_top_left(_sprite, _subimage, _x, _y) {
 		_x + sprite_get_xoffset(_sprite), _y + sprite_get_yoffset(_sprite)
 	);
 }
+
+/**
+ * @desc Creates a bounding box with right, top, left, and bottom positions
+ * @param {Real} _right the right position of the bounding box
+ * @param {Real} _top the top position of the bounding box
+ * @param {Real} _left the left position of the bounding box
+ * @param {Real} _bottom the bottom position of the bounding box
+ */
+function BoundingBox(_right, _top, _left, _bottom) constructor {
+	
+	/**
+	 * @desc Sets the positions of this bounding box
+	 * @param {Real} _right the right position to set
+	 * @param {Real} _top the top position to set
+	 * @param {Real} _left the left position to set
+	 * @param {Real} _bottom the bottom position to set
+	 */
+	static set_positions = function(_right, _top, _left, _bottom) {
+		right = _right;
+		top = _top;
+		left = _left;
+		bottom = _bottom;
+	}
+	
+	set_positions(_right, _top, _left, _bottom);
+	
+}

@@ -4,3 +4,5 @@
 if(debug) {
 	show_game_size_info();
 }
+
+interface.draw();
