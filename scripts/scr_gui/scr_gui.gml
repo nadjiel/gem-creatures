@@ -3,8 +3,12 @@
  */
 function GUI(): Tree() constructor {
 	
+	static counter = 0;
+	counter++;
+	
 	static super_add_child = add_child;
 	
+	id = counter;
 	x = 0; y = 0;
 	width = 0;
 	height = 0;
@@ -12,7 +16,6 @@ function GUI(): Tree() constructor {
 	border = new BoundingBox(0, 0, 0, 0);
 	margin = new BoundingBox(0, 0, 0, 0);
 	
-	position = new BoundingBox(0, 0, 0, 0);
 	anchor = new RelativeGUIAnchor(self);
 	
 	background_sprite = 0;
@@ -21,35 +24,73 @@ function GUI(): Tree() constructor {
 	border_image = 0;
 	
 	/**
-	 * @desc Sets the width of this interface and updates its and its children's right positions accordingly
+	 * @desc Sets the width of this interface respecting its padding and borders
 	 * @param {Real} _width the width to set
 	 */
 	static set_width = function(_width) {
+		if(_width < padding.left + padding.right + border.left + border.right) _width = padding.left + padding.right + border.left + border.right;
 		width = _width;
 		
+		// Making sure the right position is correct with the new width
 		anchor.update_right_position();
 		array_foreach(children, function(_child) { _child.anchor.update_right_position(); });
 	}
 	
 	/**
-	 * @desc Sets the height of this interface and updates its and its children's bottom positions accordingly
+	 * @desc Sets the height of this interface respecting its padding and borders and updates
 	 * @param {Real} _height the height to set
 	 */
 	static set_height = function(_height) {
+		if(_height < padding.top + padding.bottom + border.top + border.bottom) _height = padding.top + padding.bottom + border.top + border.bottom;
 		height = _height;
 		
+		// Making sure the bottom position is correct with the new height
 		anchor.update_bottom_position();
 		array_foreach(children, function(_child) { _child.anchor.update_bottom_position(); });
 	}
 	
 	/**
-	 * @desc Sets the width and height of this interface and updates its positions bounding box
+	 * @desc Sets the width and height of this interface
 	 * @param {Real} _width the width to set
 	 * @param {Real} _height the height to set
 	 */
 	static set_size = function(_width, _height) {
 		set_width(_width);
 		set_height(_height);
+	}
+	
+	static set_right_padding = function(_right) {
+		if(_right + padding.left + border.left + border.right > width) set_width(_right + padding.left + border.left + border.right);
+		
+		padding.right = _right;
+	}
+	
+	static set_top_padding = function(_top) {
+		if(_top + padding.bottom + border.top + border.bottom > height) set_height(_top + padding.bottom + border.top + border.bottom);
+		
+		padding.top = _top;
+	}
+	
+	static set_left_padding = function(_left) {
+		if(_left + padding.right + border.left + border.right > width) set_width(_left + padding.right + border.left + border.right);
+		
+		padding.left = _left;
+	}
+	
+	static set_bottom_padding = function(_bottom) {
+		if(_bottom + padding.top + border.top + border.bottom > height) set_height(_bottom + padding.top + border.top + border.bottom);
+		
+		padding.bottom = _bottom;
+	}
+	
+	static set_x_padding = function(_padding) {
+		set_right_padding(_padding);
+		set_left_padding(_padding);
+	}
+	
+	static set_y_padding = function(_padding) {
+		set_top_padding(_padding);
+		set_bottom_padding(_padding);
 	}
 	
 	/**
@@ -60,7 +101,44 @@ function GUI(): Tree() constructor {
 	 * @param {Real} _bottom the bottom padding to set
 	 */
 	static set_padding = function(_right, _top, _left, _bottom) {
-		padding.set_positions(_right, _top, _left, _bottom);
+		set_right_padding(_right);
+		set_top_padding(_top);
+		set_left_padding(_left);
+		set_bottom_padding(_bottom);
+	}
+	
+	static set_right_border = function(_right) {
+		if(_right + border.left + padding.left + padding.right > width) set_width(_right + border.left + padding.right + padding.left);
+		
+		border.right = _right;
+	}
+	
+	static set_top_border = function(_top) {
+		if(_top + border.bottom + padding.top + padding.bottom > height) set_height(_top + border.bottom + padding.top + padding.bottom);
+		
+		border.top = _top;
+	}
+	
+	static set_left_border = function(_left) {
+		if(_left + border.right + padding.left + padding.right > width) set_width(_left + border.right + padding.left + padding.right);
+		
+		border.left = _left;
+	}
+	
+	static set_bottom_border = function(_bottom) {
+		if(_bottom + border.top + padding.top + padding.bottom > height) set_height(_bottom + border.top + padding.top + padding.bottom);
+		
+		border.bottom = _bottom;
+	}
+	
+	static set_x_border = function(_border) {
+		set_right_border(_border);
+		set_left_border(_border);
+	}
+	
+	static set_y_border = function(_border) {
+		set_top_border(_border);
+		set_bottom_border(_border);
 	}
 	
 	/**
@@ -71,7 +149,40 @@ function GUI(): Tree() constructor {
 	 * @param {Real} _bottom the bottom border to set
 	 */
 	static set_border = function(_right, _top, _left, _bottom) {
-		border.set_positions(_right, _top, _left, _bottom);
+		set_right_border(_right);
+		set_top_border(_top);
+		set_left_border(_left);
+		set_bottom_border(_bottom);
+	}
+	
+	static set_right_margin = function(_margin) {
+		margin.right = _margin;
+	}
+	
+	static set_top_margin = function(_margin) {
+		if(parent == 0) y = _margin;
+		
+		margin.top = _margin;
+	}
+	
+	static set_left_margin = function(_margin) {
+		if(parent == 0) x = _margin;
+		
+		margin.left = _margin;
+	}
+	
+	static set_bottom_margin = function(_margin) {
+		margin.bottom = _margin;
+	}
+	
+	static set_x_margin = function(_margin) {
+		set_right_margin(_margin);
+		set_left_margin(_margin);
+	}
+	
+	static set_y_margin = function(_margin) {
+		set_top_margin(_margin);
+		set_bottom_margin(_margin);
 	}
 	
 	/**
@@ -82,7 +193,10 @@ function GUI(): Tree() constructor {
 	 * @param {Real} _bottom the bottom margin to set
 	 */
 	static set_margin = function(_right, _top, _left, _bottom) {
-		margin.set_positions(_right, _top, _left, _bottom);
+		set_right_margin(_right);
+		set_top_margin(_top);
+		set_left_margin(_left);
+		set_bottom_margin(_bottom);
 	}
 	
 	/**
@@ -177,7 +291,6 @@ function GUI(): Tree() constructor {
 			string("\tborder: {0};\n", border) +
 			string("\tmargin: {0};\n", margin) +
 			string("\tanchor: {0};\n", anchor) +
-			string("\tposition: {0};\n", position) +
 		"}";
 	}
 	

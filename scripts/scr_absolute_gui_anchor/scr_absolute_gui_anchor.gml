@@ -58,7 +58,7 @@ function AbsoluteGUIAnchor(_interface): GUIAnchor(_interface) constructor {
 		
 		draw_sprite_stretched(
 			interface.border_sprite, interface.border_image,
-			interface.parent.x + interface.parent.position.left + left,
+			interface.parent.x + interface.parent.anchor.left + left,
 			interface.parent.y + interface.parent.anchor.top + top,
 			interface.width, interface.height
 		);
