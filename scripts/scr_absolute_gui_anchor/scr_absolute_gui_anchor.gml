@@ -5,10 +5,6 @@ function AbsoluteGUIAnchor(_interface): GUIAnchor(_interface) constructor {
 	
 	static name = "absolute";
 	
-	// Sets the correct positions to be top-left since creation
-	set_top_position(0);
-	set_left_position(0);
-	
 	/**
 	 * @desc Updates the right position of this interface anchor based on its left position
 	 */

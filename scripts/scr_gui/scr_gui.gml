@@ -194,6 +194,28 @@ function GUI(): Tree() constructor {
 	}
 	
 	/**
+	 * @desc Returns an anchor instance based on the passed anchor name. If the name is invalid, the default anchor is relative
+	 * @param {String} _anchor_name the name of the anchor to create (either "relative", "absolute" or "fixed"
+	 * @returns {Struct.GUIAnchor} the anchor identified by the name
+	 */
+	static anchor_factory = function(_anchor_name) {
+		switch(_anchor_name) {
+			case "relative": return new RelativeGUIAnchor(self);
+			case "absolute": return new AbsoluteGUIAnchor(self);
+			case "fixed": return new FixedGUIAnchor(self);
+			default: return new RelativeGUIAnchor(self);
+		}
+	}
+	
+	static set_anchor = function(_anchor_name) {
+		anchor = anchor_factory(_anchor_name);
+		
+		// Sets the correct positions to be top-left since creation
+		anchor.set_top_position(0);
+		anchor.set_left_position(0);
+	}
+	
+	/**
 	 * @desc Updates the position of the children of this interface
 	 */
 	static update_children_position = function() {

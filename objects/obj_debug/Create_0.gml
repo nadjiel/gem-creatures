@@ -39,11 +39,13 @@ interface.add_child(child1);
 interface.add_child(child2);
 interface.add_child(child3);
 child1.add_child(grandchild1, false);
-child1.set_margin(32, 32, 32, 32);
 
-interface.anchor = new FixedGUIAnchor(interface);
+//child1.set_margin(32, 32, 32, 32);
 
-//child1.anchor = new AbsoluteGUIAnchor(child1);
+//interface.anchor = new RelativeGUIAnchor(interface);
+
+child1.set_anchor("absolute");
+interface.fit_children();
 show_debug_message(child1);
 
 /*show_debug_message("");
