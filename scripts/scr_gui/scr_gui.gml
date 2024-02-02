@@ -2,13 +2,8 @@
  * @desc Creates a GUI node
  */
 function GUI(): Tree() constructor {
-	
-	static counter = 0;
-	counter++;
-	
 	static super_add_child = add_child;
 	
-	id = counter;
 	x = 0; y = 0;
 	width = 0;
 	height = 0;
