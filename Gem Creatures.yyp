@@ -28,7 +28,7 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Data Structures","folderPath":"folders/Scripts/Data Structures.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Input","folderPath":"folders/Scripts/Input.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Interface","folderPath":"folders/Scripts/Interface.yy",},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Anchoring","folderPath":"folders/Scripts/Interface/Anchoring.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Anchors","folderPath":"folders/Scripts/Interface/Anchors.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Items","folderPath":"folders/Scripts/Items.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"States","folderPath":"folders/Scripts/States.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sequences","folderPath":"folders/Sequences.yy",},

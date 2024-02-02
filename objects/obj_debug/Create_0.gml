@@ -12,6 +12,7 @@ interface = new GUI();
 child1 = new GUI();
 child2 = new GUI();
 child3 = new GUI();
+grandchild1 = new GUI();
 
 interface.background_sprite = spr_inventory_bg;
 interface.border_sprite = spr_inventory_cursor;
@@ -21,6 +22,8 @@ child2.background_sprite = spr_bg;
 child2.border_sprite = spr_inventory_cursor;
 child3.background_sprite = spr_bg;
 child3.border_sprite = spr_inventory_cursor;
+grandchild1.background_sprite = spr_pineapple;
+grandchild1.border_sprite = spr_inventory_cursor;
 
 interface.set_border(8, 8, 8, 8);
 interface.set_padding(8, 8, 8, 8);
@@ -29,14 +32,17 @@ child1.set_margin(8, 8, 8, 8);
 child2.set_size(32, 32);
 child2.set_margin(8, 8, 8, 8);
 child3.set_size(8, 8);
+child3.set_margin(8, 8, 8, 8);
+grandchild1.set_size(4, 4);
 
-interface.fit_children();
+interface.add_child(child1);
+interface.add_child(child2);
+interface.add_child(child3);
+child1.add_child(grandchild1, false);
+child1.set_margin(32, 32, 32, 32);
 
-interface.add_child(child1, false);
-interface.add_child(child2, false);
-interface.add_child(child3, false);
+interface.anchor = new FixedGUIAnchor(interface);
 
-interface.fit_children();
 //child1.anchor = new AbsoluteGUIAnchor(child1);
 show_debug_message(child1);
 

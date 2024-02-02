@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Anchoring",
-    "path": "folders/Scripts/Interface/Anchoring.yy",
+    "name": "Anchors",
+    "path": "folders/Scripts/Interface/Anchors.yy",
   },
 }

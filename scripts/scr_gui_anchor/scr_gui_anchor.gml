@@ -13,6 +13,7 @@ function GUIAnchor(_interface): BoundingBox(0, 0, 0, 0) constructor {
 		right = _position;
 		
 		update_left_position();
+		interface.update_children_position();
 	}
 	
 	/**
@@ -23,6 +24,7 @@ function GUIAnchor(_interface): BoundingBox(0, 0, 0, 0) constructor {
 		top = _position;
 		
 		update_bottom_position();
+		interface.update_children_position();
 	}
 	
 	/**
@@ -33,6 +35,7 @@ function GUIAnchor(_interface): BoundingBox(0, 0, 0, 0) constructor {
 		left = _position;
 		
 		update_right_position();
+		interface.update_children_position();
 	}
 	
 	/**
@@ -43,6 +46,7 @@ function GUIAnchor(_interface): BoundingBox(0, 0, 0, 0) constructor {
 		bottom = _position;
 		
 		update_top_position();
+		interface.update_children_position();
 	}
 	
 }

@@ -82,4 +82,5 @@ function Tree() constructor {
 		
 		return _descendent;
 	}
+	
 }

@@ -194,6 +194,48 @@ function GUI(): Tree() constructor {
 	}
 	
 	/**
+	 * @desc Updates the position of the children of this interface
+	 */
+	static update_children_position = function() {
+		array_foreach(children, function(_child) { _child.update_position(); });
+	}
+	
+	/**
+	 * @desc Updates the position of this interface taking a column layout in consideration
+	 */
+	static update_position = function() {
+		if(!parent) {
+			// Sets x and y to be just inside GUI
+			x = margin.left;
+			y = margin.top;
+			return;
+		}
+		
+		// Sets x and y to be just inside parent
+		x = parent.get_anchored_x() + parent.border.left + parent.padding.left + margin.left;
+		y = parent.get_anchored_y() + parent.border.top + parent.padding.top + margin.top;
+		
+		// Looks for the last relative anchored sibling
+		var _index = parent.get_child_index(self);
+		var _last_relative_sibling_index = array_find_index(parent.children, method({ index: _index }, function(_child, _i) {
+			if(_i == index) return false;
+			
+			return _child.anchor.name == "relative";
+		}), _index, -infinity);
+		
+		// If the last child was found
+		if(_last_relative_sibling_index != -1) {
+			var _last_relative_sibling = parent.children[_last_relative_sibling_index];
+			
+			// Sets the y coordinate of the new child to be right under its younger sibling
+			y = _last_relative_sibling.y + _last_relative_sibling.height + _last_relative_sibling.margin.bottom + margin.top;
+		}
+		
+		// Updates the position of the children as well
+		update_children_position();
+	}
+	
+	/**
 	 * @desc Returns the width desconsidering the borders
 	 */
 	static get_padding_width = function() {
@@ -259,27 +301,16 @@ function GUI(): Tree() constructor {
 		set_size(_width, _height);
 	}
 	
+	/**
+	 * @desc Adds a child under the existing ones in a column layout, and fits to hold it properly if the fit parameter is true
+	 * @param {Struct.GUI} _child the child to add to this interface node
+	 * @param {Bool} _fit tells if this interface should stretch to fit the new child
+	 */
 	static add_child = function(_child, _fit = true) {
 		super_add_child(_child);
 		
-		// Sets x and y of child to be just inside parent
-		_child.x = x + anchor.left + border.left + padding.left + _child.margin.left;
-		_child.y = y + anchor.top + border.top + padding.top + _child.margin.top;
-		
-		// Looks for the last relative anchored child
-		var _last_child_index = array_find_index(children, function(_child, _i) {
-			if(_i == array_length(children) - 1) return false;
-			
-			return _child.anchor.name == "relative";
-		}, -1, -infinity);
-		
-		// If the last child was found
-		if(_last_child_index != -1) {
-			var _last_child = children[_last_child_index];
-			
-			// Sets the y coordinate of the new child to be right under its younger sibling
-			_child.y = _last_child.y + _last_child.height + _last_child.margin.bottom + _child.margin.top;
-		}
+		// Calculates the position of the new child
+		_child.update_position();
 		
 		// Fits the interface to contain the children
 		if(_fit) fit_children();

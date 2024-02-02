@@ -17,7 +17,7 @@
     {"name":"Data Structures","order":17,"path":"folders/Scripts/Data Structures.yy",},
     {"name":"Input","order":15,"path":"folders/Scripts/Input.yy",},
     {"name":"Interface","order":16,"path":"folders/Scripts/Interface.yy",},
-    {"name":"Anchoring","order":1,"path":"folders/Scripts/Interface/Anchoring.yy",},
+    {"name":"Anchors","order":1,"path":"folders/Scripts/Interface/Anchors.yy",},
     {"name":"Items","order":13,"path":"folders/Scripts/Items.yy",},
     {"name":"States","order":9,"path":"folders/Scripts/States.yy",},
     {"name":"Sequences","order":11,"path":"folders/Sequences.yy",},
