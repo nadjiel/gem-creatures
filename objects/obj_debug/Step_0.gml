@@ -6,10 +6,10 @@ global.frame_counter++;
 // Toggles fullscreen on and off
 if(obj_input.keys.esc.press) window_set_fullscreen(!window_get_fullscreen());
 
-if(obj_input.keys.f2.press) { child.anchor.set_right_position(8); show_debug_message(child) }
-if(obj_input.keys.f3.press) { child.anchor.set_top_position(8); show_debug_message(child) }
-if(obj_input.keys.f4.press) { child.anchor.set_left_position(8); show_debug_message(child) }
-if(obj_input.keys.f5.press) { child.anchor.set_bottom_position(8); show_debug_message(child) }
+if(obj_input.keys.f2.press) { child1.anchor.set_right_position(8); show_debug_message(child1) }
+if(obj_input.keys.f3.press) { child1.anchor.set_top_position(8); show_debug_message(child1) }
+if(obj_input.keys.f4.press) { child1.anchor.set_left_position(8); show_debug_message(child1) }
+if(obj_input.keys.f5.press) { child1.anchor.set_bottom_position(8); show_debug_message(child1) }
 
 /*if(obj_input.keys.f2.hold && mouse_wheel_up()) display_set_gui_size(display_get_gui_width() / 2, display_get_gui_height() / 2);
 if(obj_input.keys.f2.hold && mouse_wheel_down()) display_set_gui_size(display_get_gui_width() * 2, display_get_gui_height() * 2);

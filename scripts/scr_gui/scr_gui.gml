@@ -221,25 +221,40 @@ function GUI(): Tree() constructor {
 		return get_padding_height() - padding.top - padding.bottom;
 	}
 	
+	/**
+	 * @desc Returns the x position of this interface with the anchor displacement
+	 * @returns the anchored x position
+	 */
 	static get_anchored_x = function() {
 		return anchor.get_x();
 	}
 	
+	/**
+	 * @desc Returns the y position of this interface with the anchor displacement
+	 * @returns the anchored y position
+	 */
 	static get_anchored_y = function() {
 		return anchor.get_y();
 	}
 	
+	/**
+	 * @desc Sets the width and height of this interface to fit its children nicely, taking a column layout in consideration
+	 */
 	static fit_children = function() {
-		var _width = border.left + border.right + padding.left + padding.right;
-		var _height = border.top + border.bottom + padding.top + padding.bottom;
+		var _content_width = 0;
+		var _content_height = 0;
+		
 		for(var _i = 0; _i < array_length(children); _i++) {
-			if(children[_i].anchor.name != "relative") continue;
-			
 			var _child = children[_i];
 			
-			_width = max(_width, anchor.left + border.left + border.right + padding.left + padding.right + (_child.x - x) + _child.width + _child.margin.left + _child.margin.right);
-			_height = max(_height, anchor.top + border.top + border.bottom + padding.top + padding.bottom + (_child.y - y) + _child.height + _child.margin.top + _child.margin.bottom);
+			if(_child.anchor.name != "relative") continue;
+			
+			_content_width = max(_content_width, _child.margin.left + _child.margin.right + _child.width);
+			_content_height += _child.margin.top + _child.margin.bottom + _child.height;
 		}
+		
+		var _width = _content_width + border.left + border.right + padding.left + padding.right;
+		var _height = _content_height + border.top + border.bottom + padding.top + padding.bottom;
 		
 		set_size(_width, _height);
 	}

@@ -9,20 +9,36 @@ _parent.add_child(new Tree());
 show_debug_message(_parent.children)*/
 
 interface = new GUI();
-child = new GUI();
+child1 = new GUI();
+child2 = new GUI();
+child3 = new GUI();
 
 interface.background_sprite = spr_inventory_bg;
 interface.border_sprite = spr_inventory_cursor;
-child.background_sprite = spr_bg;
-child.border_sprite = spr_inventory_cursor;
+child1.background_sprite = spr_bg;
+child1.border_sprite = spr_inventory_cursor;
+child2.background_sprite = spr_bg;
+child2.border_sprite = spr_inventory_cursor;
+child3.background_sprite = spr_bg;
+child3.border_sprite = spr_inventory_cursor;
 
 interface.set_border(8, 8, 8, 8);
 interface.set_padding(8, 8, 8, 8);
-child.set_size(16, 16);
+child1.set_size(16, 16);
+child1.set_margin(8, 8, 8, 8);
+child2.set_size(32, 32);
+child2.set_margin(8, 8, 8, 8);
+child3.set_size(8, 8);
 
-interface.add_child(child);
-child.anchor = new FixedGUIAnchor(child); 
-show_debug_message(child);
+interface.fit_children();
+
+interface.add_child(child1, false);
+interface.add_child(child2, false);
+interface.add_child(child3, false);
+
+interface.fit_children();
+//child1.anchor = new AbsoluteGUIAnchor(child1);
+show_debug_message(child1);
 
 /*show_debug_message("");
 show_debug_message("Parent: {0}", interface);
