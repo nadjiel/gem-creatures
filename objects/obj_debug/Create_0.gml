@@ -44,7 +44,7 @@ child1.add_child(grandchild1, false);
 
 //interface.anchor = new RelativeGUIAnchor(interface);
 
-child1.set_anchor("absolute");
+child1.set_anchor("relative");
 interface.fit_children();
 show_debug_message(child1);
 
