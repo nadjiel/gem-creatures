@@ -5,8 +5,7 @@ function GUI(): Tree() constructor {
 	static super_add_child = add_child;
 	
 	x = 0; y = 0;
-	width = 0;
-	height = 0;
+	width = 0; height = 0;
 	padding = new BoundingBox(0, 0, 0, 0);
 	border = new BoundingBox(0, 0, 0, 0);
 	margin = new BoundingBox(0, 0, 0, 0);
@@ -222,6 +221,14 @@ function GUI(): Tree() constructor {
 		return get_padding_height() - padding.top - padding.bottom;
 	}
 	
+	static get_anchored_x = function() {
+		return anchor.get_x();
+	}
+	
+	static get_anchored_y = function() {
+		return anchor.get_y();
+	}
+	
 	static fit_children = function() {
 		var _width = border.left + border.right + padding.left + padding.right;
 		var _height = border.top + border.bottom + padding.top + padding.bottom;
@@ -264,11 +271,25 @@ function GUI(): Tree() constructor {
 	}
 	
 	static draw_border = function() {
-		anchor.draw_border();
+		if(border_sprite == 0) return;
+		
+		draw_sprite_stretched(
+			border_sprite, border_image,
+			get_anchored_x(),
+			get_anchored_y(),
+			width, height
+		);
 	}
 	
 	static draw_background = function() {
-		anchor.draw_background();
+		if(background_sprite == 0) return;
+		
+		draw_sprite_stretched(
+			background_sprite, background_image,
+			get_anchored_x() + border.left,
+			get_anchored_y() + border.top,
+			get_padding_width(), get_padding_height()
+		);
 	}
 	
 	static draw = function() {

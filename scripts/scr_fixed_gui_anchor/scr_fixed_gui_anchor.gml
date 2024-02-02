@@ -5,6 +5,10 @@ function FixedGUIAnchor(_interface): GUIAnchor(_interface) constructor {
 	
 	static name = "fixed";
 	
+	// Sets the correct positions to be top-left since creation
+	set_top_position(0);
+	set_left_position(0);
+	
 	/**
 	 * @desc Updates the right position of this interface anchor based on its left position
 	 */
@@ -34,30 +38,19 @@ function FixedGUIAnchor(_interface): GUIAnchor(_interface) constructor {
 	}
 	
 	/**
-	 * @desc Draws the border of the interface with the offsets of this anchor
+	 * @desc Returns the x position of the anchored interface
+	 * @returns {Real} the x position of the anchored interface
 	 */
-	static draw_border = function() {
-		if(interface.border_sprite == 0) return;
-		
-		draw_sprite_stretched(
-			interface.border_sprite, interface.border_image,
-			left, top,
-			interface.width, interface.height
-		);
+	static get_x = function() {
+		return left;
 	}
 	
 	/**
-	 * @desc Draws the background of the interface with the offsets of this anchor
+	 * @desc Returns the y position of the anchored interface
+	 * @returns {Real} the y position of the anchored interface
 	 */
-	static draw_background = function() {
-		if(interface.background_sprite == 0) return;
-		
-		draw_sprite_stretched(
-			interface.background_sprite, interface.background_image,
-			left + interface.border.left,
-			top + interface.border.top,
-			interface.get_padding_width(), interface.get_padding_height()
-		);
+	static get_y = function() {
+		return top;
 	}
 	
 }

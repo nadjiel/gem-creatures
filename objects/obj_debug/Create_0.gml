@@ -9,9 +9,20 @@ _parent.add_child(new Tree());
 show_debug_message(_parent.children)*/
 
 interface = new GUI();
+child = new GUI();
+
 interface.background_sprite = spr_inventory_bg;
 interface.border_sprite = spr_inventory_cursor;
-show_debug_message(interface);
+child.background_sprite = spr_bg;
+child.border_sprite = spr_inventory_cursor;
+
+interface.set_border(8, 8, 8, 8);
+interface.set_padding(8, 8, 8, 8);
+child.set_size(16, 16);
+
+interface.add_child(child);
+child.anchor = new FixedGUIAnchor(child); 
+show_debug_message(child);
 
 /*show_debug_message("");
 show_debug_message("Parent: {0}", interface);

@@ -5,6 +5,10 @@ function AbsoluteGUIAnchor(_interface): GUIAnchor(_interface) constructor {
 	
 	static name = "absolute";
 	
+	// Sets the correct positions to be top-left since creation
+	set_top_position(0);
+	set_left_position(0);
+	
 	/**
 	 * @desc Updates the right position of this interface anchor based on its left position
 	 */
@@ -42,50 +46,23 @@ function AbsoluteGUIAnchor(_interface): GUIAnchor(_interface) constructor {
 	}
 	
 	/**
-	 * @desc Draws the border of the interface with the offsets of this anchor
+	 * @desc Returns the x position of the anchored interface
+	 * @returns {Real} the x position of the anchored interface
 	 */
-	static draw_border = function() {
-		if(interface.border_sprite == 0) return;
+	static get_x = function() {
+		if(!interface.parent) return left;
 		
-		if(interface.parent == 0) {
-			draw_sprite_stretched(
-				interface.border_sprite, interface.border_image,
-				left, top,
-				interface.width, interface.height
-			);
-			return;
-		}
-		
-		draw_sprite_stretched(
-			interface.border_sprite, interface.border_image,
-			interface.parent.x + interface.parent.anchor.left + left,
-			interface.parent.y + interface.parent.anchor.top + top,
-			interface.width, interface.height
-		);
+		return interface.parent.get_anchored_x() + left;
 	}
 	
 	/**
-	 * @desc Draws the background of the interface with the offsets of this anchor
+	 * @desc Returns the y position of the anchored interface
+	 * @returns {Real} the y position of the anchored interface
 	 */
-	static draw_background = function() {
-		if(interface.background_sprite == 0) return;
+	static get_y = function() {
+		if(!interface.parent) return top;
 		
-		if(interface.parent == 0) {
-			draw_sprite_stretched(
-				interface.background_sprite, interface.background_image,
-				left + interface.border.left,
-				top + interface.border.top,
-				interface.get_padding_width(), interface.get_padding_height()
-			);
-			return;
-		}
-		
-		draw_sprite_stretched(
-			interface.background_sprite, interface.background_image,
-			interface.parent.x + interface.parent.anchor.left + left + interface.border.left + interface.padding.left,
-			interface.parent.y + interface.parent.anchor.top + top + interface.border.top + interface.padding.top,
-			interface.get_content_width(), interface.get_content_height()
-		);
+		return interface.parent.get_anchored_y() + top;
 	}
 	
 }
