@@ -18,7 +18,7 @@ function GUI(): Tree() constructor {
 	border_image = 0;
 	
 	/**
-	 * @desc Sets the width of this interface respecting its padding and borders
+	 * @desc Sets the width of this interface respecting its padding and borders and updates the next siblings position to respect it
 	 * @param {Real} _width the width to set
 	 */
 	static set_width = function(_width) {
@@ -28,10 +28,20 @@ function GUI(): Tree() constructor {
 		// Making sure the right position is correct with the new width
 		anchor.update_right_position();
 		array_foreach(children, function(_child) { _child.anchor.update_right_position(); });
+		
+		if(!parent) return;
+		
+		// Find the index of the next sibling
+		var _next_sibling_index = parent.get_child_index(self) + 1;
+		
+		// Updates the position of all the next siblings
+		if(array_length(parent.children) > _next_sibling_index) {
+			array_foreach(parent.children, function(_child) { _child.update_position() }, _next_sibling_index);
+		}
 	}
 	
 	/**
-	 * @desc Sets the height of this interface respecting its padding and borders and updates
+	 * @desc Sets the height of this interface respecting its padding and borders and updates the next siblings position to respect it
 	 * @param {Real} _height the height to set
 	 */
 	static set_height = function(_height) {
@@ -41,6 +51,16 @@ function GUI(): Tree() constructor {
 		// Making sure the bottom position is correct with the new height
 		anchor.update_bottom_position();
 		array_foreach(children, function(_child) { _child.anchor.update_bottom_position(); });
+		
+		if(!parent) return;
+		
+		// Find the index of the next sibling
+		var _next_sibling_index = parent.get_child_index(self) + 1;
+		
+		// Updates the position of all the next siblings
+		if(array_length(parent.children) > _next_sibling_index) {
+			array_foreach(parent.children, function(_child) { _child.update_position() }, _next_sibling_index);
+		}
 	}
 	
 	/**
@@ -53,35 +73,59 @@ function GUI(): Tree() constructor {
 		set_height(_height);
 	}
 	
-	static set_right_padding = function(_right) {
-		if(_right + padding.left + border.left + border.right > width) set_width(_right + padding.left + border.left + border.right);
+	/**
+	 * @desc Sets the right padding
+	 * @param {Real} _padding the padding to set
+	 */
+	static set_right_padding = function(_padding) {
+		if(_padding + padding.left + border.left + border.right > width) set_width(_padding + padding.left + border.left + border.right);
 		
-		padding.right = _right;
+		padding.right = _padding;
 	}
 	
-	static set_top_padding = function(_top) {
-		if(_top + padding.bottom + border.top + border.bottom > height) set_height(_top + padding.bottom + border.top + border.bottom);
+	/**
+	 * @desc Sets the top padding
+	 * @param {Real} _padding the padding to set
+	 */
+	static set_top_padding = function(_padding) {
+		if(_padding + padding.bottom + border.top + border.bottom > height) set_height(_padding + padding.bottom + border.top + border.bottom);
 		
-		padding.top = _top;
+		padding.top = _padding;
 	}
 	
-	static set_left_padding = function(_left) {
-		if(_left + padding.right + border.left + border.right > width) set_width(_left + padding.right + border.left + border.right);
+	/**
+	 * @desc Sets the left padding
+	 * @param {Real} _padding the padding to set
+	 */
+	static set_left_padding = function(_padding) {
+		if(_padding + padding.right + border.left + border.right > width) set_width(_padding + padding.right + border.left + border.right);
 		
-		padding.left = _left;
+		padding.left = _padding;
 	}
 	
-	static set_bottom_padding = function(_bottom) {
-		if(_bottom + padding.top + border.top + border.bottom > height) set_height(_bottom + padding.top + border.top + border.bottom);
+	/**
+	 * @desc Sets the bottom padding
+	 * @param {Real} _padding the padding to set
+	 */
+	static set_bottom_padding = function(_padding) {
+		if(_padding + padding.top + border.top + border.bottom > height) set_height(_padding + padding.top + border.top + border.bottom);
 		
-		padding.bottom = _bottom;
+		padding.bottom = _padding;
 	}
 	
+	/**
+	 * @desc Sets the right and left paddings
+	 * @param {Real} _padding the padding to set
+	 */
 	static set_x_padding = function(_padding) {
 		set_right_padding(_padding);
 		set_left_padding(_padding);
 	}
 	
+	/**
+	 * @desc Sets the top and bottom paddings
+	 * @param {Real} _padding the padding to set
+	 */
 	static set_y_padding = function(_padding) {
 		set_top_padding(_padding);
 		set_bottom_padding(_padding);
@@ -101,35 +145,59 @@ function GUI(): Tree() constructor {
 		set_bottom_padding(_bottom);
 	}
 	
-	static set_right_border = function(_right) {
-		if(_right + border.left + padding.left + padding.right > width) set_width(_right + border.left + padding.right + padding.left);
+	/**
+	 * @desc Sets the right border
+	 * @param {Real} _border the border to set
+	 */
+	static set_right_border = function(_border) {
+		if(_border + border.left + padding.left + padding.right > width) set_width(_border + border.left + padding.right + padding.left);
 		
-		border.right = _right;
+		border.right = _border;
 	}
 	
-	static set_top_border = function(_top) {
-		if(_top + border.bottom + padding.top + padding.bottom > height) set_height(_top + border.bottom + padding.top + padding.bottom);
+	/**
+	 * @desc Sets the top border
+	 * @param {Real} _border the border to set
+	 */
+	static set_top_border = function(_border) {
+		if(_border + border.bottom + padding.top + padding.bottom > height) set_height(_border + border.bottom + padding.top + padding.bottom);
 		
-		border.top = _top;
+		border.top = _border;
 	}
 	
-	static set_left_border = function(_left) {
-		if(_left + border.right + padding.left + padding.right > width) set_width(_left + border.right + padding.left + padding.right);
+	/**
+	 * @desc Sets the left border
+	 * @param {Real} _border the border to set
+	 */
+	static set_left_border = function(_border) {
+		if(_border + border.right + padding.left + padding.right > width) set_width(_border + border.right + padding.left + padding.right);
 		
-		border.left = _left;
+		border.left = _border;
 	}
 	
-	static set_bottom_border = function(_bottom) {
-		if(_bottom + border.top + padding.top + padding.bottom > height) set_height(_bottom + border.top + padding.top + padding.bottom);
+	/**
+	 * @desc Sets the bottom border
+	 * @param {Real} _border the border to set
+	 */
+	static set_bottom_border = function(_border) {
+		if(_border + border.top + padding.top + padding.bottom > height) set_height(_border + border.top + padding.top + padding.bottom);
 		
-		border.bottom = _bottom;
+		border.bottom = _border;
 	}
 	
+	/**
+	 * @desc Sets the right and left borders
+	 * @param {Real} _border the border to set
+	 */
 	static set_x_border = function(_border) {
 		set_right_border(_border);
 		set_left_border(_border);
 	}
 	
+	/**
+	 * @desc Sets the top and bottom borders
+	 * @param {Real} _border the border to set
+	 */
 	static set_y_border = function(_border) {
 		set_top_border(_border);
 		set_bottom_border(_border);
@@ -191,6 +259,10 @@ function GUI(): Tree() constructor {
 		update_children_position();
 	}
 	
+	/**
+	 * @desc Sets the right margin and updates the following siblings to respect it
+	 * @param {Real} _margin the margin to set
+	 */
 	static set_right_margin = function(_margin) {
 		margin.right = _margin;
 		
@@ -205,6 +277,10 @@ function GUI(): Tree() constructor {
 		}
 	}
 	
+	/**
+	 * @desc Sets the top margin and updates this and the following siblings to respect it
+	 * @param {Real} _margin the margin to set
+	 */
 	static set_top_margin = function(_margin) {
 		margin.top = _margin;
 		
@@ -217,6 +293,10 @@ function GUI(): Tree() constructor {
 		array_foreach(parent.children, function(_child) { _child.update_position() }, _index);
 	}
 	
+	/**
+	 * @desc Sets the left margin and updates this and the following siblings to respect it
+	 * @param {Real} _margin the margin to set
+	 */
 	static set_left_margin = function(_margin) {
 		margin.left = _margin;
 		
@@ -229,6 +309,10 @@ function GUI(): Tree() constructor {
 		array_foreach(parent.children, function(_child) { _child.update_position() }, _index);
 	}
 	
+	/**
+	 * @desc Sets the bottom margin and updates the following siblings to respect it
+	 * @param {Real} _margin the margin to set
+	 */
 	static set_bottom_margin = function(_margin) {
 		margin.bottom = _margin;
 		
@@ -243,11 +327,19 @@ function GUI(): Tree() constructor {
 		}
 	}
 	
+	/**
+	 * @desc Sets the left and right margins and updates this and the following siblings to respect it
+	 * @param {Real} _margin the margin to set
+	 */
 	static set_x_margin = function(_margin) {
 		set_right_margin(_margin);
 		set_left_margin(_margin);
 	}
 	
+	/**
+	 * @desc Sets the top and bottom margins and updates this and the following siblings to respect it
+	 * @param {Real} _margin the margin to set
+	 */
 	static set_y_margin = function(_margin) {
 		set_top_margin(_margin);
 		set_bottom_margin(_margin);
