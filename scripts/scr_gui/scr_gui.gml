@@ -149,24 +149,98 @@ function GUI(): Tree() constructor {
 		set_bottom_border(_bottom);
 	}
 	
+	/**
+	 * @desc Updates the position of the children of this interface
+	 */
+	static update_children_position = function() {
+		array_foreach(children, function(_child) { _child.update_position(); });
+	}
+	
+	/**
+	 * @desc Updates the position of this interface taking a column layout in consideration
+	 */
+	static update_position = function() {
+		if(!parent) {
+			// Sets x and y to be just inside GUI
+			x = margin.left;
+			y = margin.top;
+			return;
+		}
+		
+		// Sets x and y to be just inside parent
+		x = parent.get_anchored_x() + parent.border.left + parent.padding.left + margin.left;
+		y = parent.get_anchored_y() + parent.border.top + parent.padding.top + margin.top;
+		
+		// Looks for the last relative anchored sibling
+		var _index = parent.get_child_index(self);
+		var _last_relative_sibling_index = array_find_index(parent.children, method({ index: _index }, function(_child, _i) {
+			if(_i == index) return false;
+			
+			return _child.anchor.name == "relative";
+		}), _index, -infinity);
+		
+		// If the last child was found
+		if(_last_relative_sibling_index != -1) {
+			var _last_relative_sibling = parent.children[_last_relative_sibling_index];
+			
+			// Sets the y coordinate of the new child to be right under its younger sibling
+			y = _last_relative_sibling.y + _last_relative_sibling.height + _last_relative_sibling.margin.bottom + margin.top;
+		}
+		
+		// Updates the position of the children as well
+		update_children_position();
+	}
+	
 	static set_right_margin = function(_margin) {
 		margin.right = _margin;
+		
+		if(!parent) return;
+		
+		// Find the index of the next sibling
+		var _next_sibling_index = parent.get_child_index(self) + 1;
+		
+		// Updates the position of all the next siblings
+		if(array_length(parent.children) > _next_sibling_index) {
+			array_foreach(parent.children, function(_child) { _child.update_position() }, _next_sibling_index);
+		}
 	}
 	
 	static set_top_margin = function(_margin) {
-		if(parent == 0) y = _margin;
-		
 		margin.top = _margin;
+		
+		if(!parent) { update_position(); return; }
+		
+		// Find the index of this interface
+		var _index = parent.get_child_index(self);
+		
+		// Updates the position of this node and the next ones
+		array_foreach(parent.children, function(_child) { _child.update_position() }, _index);
 	}
 	
 	static set_left_margin = function(_margin) {
-		if(parent == 0) x = _margin;
-		
 		margin.left = _margin;
+		
+		if(!parent) { update_position(); return; }
+		
+		// Find the index of this interface
+		var _index = parent.get_child_index(self);
+		
+		// Updates the position of this node and the next ones
+		array_foreach(parent.children, function(_child) { _child.update_position() }, _index);
 	}
 	
 	static set_bottom_margin = function(_margin) {
 		margin.bottom = _margin;
+		
+		if(!parent) return;
+		
+		// Find the index of the next sibling
+		var _next_sibling_index = parent.get_child_index(self) + 1;
+		
+		// Updates the position of all the next siblings
+		if(array_length(parent.children) > _next_sibling_index) {
+			array_foreach(parent.children, function(_child) { _child.update_position() }, _next_sibling_index);
+		}
 	}
 	
 	static set_x_margin = function(_margin) {
@@ -227,48 +301,6 @@ function GUI(): Tree() constructor {
 		if(array_length(parent.children) > _next_sibling_index) {
 			array_foreach(parent.children, function(_child) { _child.update_position() }, _next_sibling_index);
 		}
-	}
-	
-	/**
-	 * @desc Updates the position of the children of this interface
-	 */
-	static update_children_position = function() {
-		array_foreach(children, function(_child) { _child.update_position(); });
-	}
-	
-	/**
-	 * @desc Updates the position of this interface taking a column layout in consideration
-	 */
-	static update_position = function() {
-		if(!parent) {
-			// Sets x and y to be just inside GUI
-			x = margin.left;
-			y = margin.top;
-			return;
-		}
-		
-		// Sets x and y to be just inside parent
-		x = parent.get_anchored_x() + parent.border.left + parent.padding.left + margin.left;
-		y = parent.get_anchored_y() + parent.border.top + parent.padding.top + margin.top;
-		
-		// Looks for the last relative anchored sibling
-		var _index = parent.get_child_index(self);
-		var _last_relative_sibling_index = array_find_index(parent.children, method({ index: _index }, function(_child, _i) {
-			if(_i == index) return false;
-			
-			return _child.anchor.name == "relative";
-		}), _index, -infinity);
-		
-		// If the last child was found
-		if(_last_relative_sibling_index != -1) {
-			var _last_relative_sibling = parent.children[_last_relative_sibling_index];
-			
-			// Sets the y coordinate of the new child to be right under its younger sibling
-			y = _last_relative_sibling.y + _last_relative_sibling.height + _last_relative_sibling.margin.bottom + margin.top;
-		}
-		
-		// Updates the position of the children as well
-		update_children_position();
 	}
 	
 	/**
