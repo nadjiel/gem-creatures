@@ -36,18 +36,15 @@ child2.set_bottom_margin(8);
 child3.set_size(8, 8);
 grandchild1.set_size(4, 4);
 
-child1.set_anchor("absolute");
+interface.add_child(child1);
+interface.add_child(child2);
+interface.add_child(child3);
+child1.add_child(grandchild1);
 
-interface.add_child(child1, false);
-interface.add_child(child2, false);
-interface.add_child(child3, false);
-child1.add_child(grandchild1, false);
-
-//interface.fit_children();
-interface.set_size(64, 64);
 interface.overflow = "hidden";
-child1.anchor.set_right_position(8);
-child1.anchor.set_top_position(8);
+interface.fit_children();
+interface.update_position();
+
 show_debug_message(interface);
 show_debug_message(child1);
 show_debug_message(child2);
