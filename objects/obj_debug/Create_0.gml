@@ -42,6 +42,7 @@ interface.add_child(child3);
 child1.add_child(grandchild1);
 
 interface.overflow = "hidden";
+interface.update_content_size();
 interface.fit_children();
 interface.update_position();
 

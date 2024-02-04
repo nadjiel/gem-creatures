@@ -5,10 +5,13 @@ function GUI(): Tree() constructor {
 	static super_add_child = add_child;
 	
 	x = 0; y = 0;
+	content_width = 0; content_height = 0;
 	width = 0; height = 0;
 	padding = new BoundingBox(0, 0, 0, 0);
 	border = new BoundingBox(0, 0, 0, 0);
 	margin = new BoundingBox(0, 0, 0, 0);
+	
+	director = new GUIDirectorColumn();
 	
 	anchor = new RelativeGUIAnchor(self);
 	
@@ -32,20 +35,6 @@ function GUI(): Tree() constructor {
 	 */
 	static get_padding_height = function() {
 		return height - border.top - border.bottom;
-	}
-	
-	/**
-	 * @desc Returns the width desconsidering the paddings and borders
-	 */
-	static get_content_width = function() {
-		return get_padding_width() - padding.left - padding.right;
-	}
-	
-	/**
-	 * @desc Returns the height desconsidering the paddings and borders
-	 */
-	static get_content_height = function() {
-		return get_padding_height() - padding.top - padding.bottom;
 	}
 	
 	/**
@@ -409,29 +398,19 @@ function GUI(): Tree() constructor {
 	}
 	
 	/**
-	 * @desc Sets the width and height of this interface to fit its children nicely, taking a column layout in consideration
+	 * @desc Updates the content size of this interface
+	 */
+	static update_content_size = function() {
+		director.update_content_size(self);
+	}
+	
+	/**
+	 * @desc Sets the width and height of this interface to fit its children nicely
 	 */
 	static fit_children = function() {
-		// Initial content size
-		var _content_width = 0;
-		var _content_height = 0;
+		var _width = content_width + padding.left + padding.right + border.left + border.right;
+		var _height = content_height + padding.top + padding.bottom + border.top + border.bottom;
 		
-		// Iterating over the children
-		for(var _i = 0; _i < array_length(children); _i++) {
-			var _child = children[_i];
-			
-			if(_child.anchor.name != "relative") continue;
-			
-			// Prioritizes the greatest child's width and sums the children heights
-			_content_width = max(_content_width, _child.margin.left + _child.margin.right + _child.width);
-			_content_height += _child.margin.top + _child.margin.bottom + _child.height;
-		}
-		
-		// Sums the content width with the extremities
-		var _width = _content_width + border.left + border.right + padding.left + padding.right;
-		var _height = _content_height + border.top + border.bottom + padding.top + padding.bottom;
-		
-		// Updates the size
 		set_size(_width, _height);
 	}
 	
@@ -511,7 +490,6 @@ function GUI(): Tree() constructor {
 	static draw = function(_surface) {
 		select_self_surface(_surface);
 		
-		show_debug_message("Node {0} surf: {1}", id, surface_get_target())
 		draw_border();
 		draw_background();
 		
@@ -533,7 +511,8 @@ function GUI(): Tree() constructor {
 	static toString = function() {
 		return "{\n" +
 			string("\tcoordinate: {0} x {1};\n", x, y) +
-			string("\tcontent: {0} x {1};\n", width, height) +
+			string("\tcontent size: {0} x {1};\n", content_width, content_height) +
+			string("\tsize: {0} x {1};\n", width, height) +
 			string("\tpadding: {0};\n", padding) +
 			string("\tborder: {0};\n", border) +
 			string("\tmargin: {0};\n", margin) +
