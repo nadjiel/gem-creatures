@@ -27,22 +27,33 @@ grandchild1.border_sprite = spr_inventory_cursor;
 
 interface.set_border(8, 8, 8, 8);
 interface.set_padding(8, 8, 8, 8);
+interface.set_margin(16, 16, 16, 16);
 child1.set_size(16, 16);
 child1.set_bottom_margin(8);
 child2.set_size(32, 32);
+child2.set_border(8, 8, 8, 8);
 child2.set_bottom_margin(8);
 child3.set_size(8, 8);
 grandchild1.set_size(4, 4);
 
-interface.add_child(child1);
-interface.add_child(child2);
-interface.add_child(child3);
+child1.set_anchor("absolute");
+
+interface.add_child(child1, false);
+interface.add_child(child2, false);
+interface.add_child(child3, false);
 child1.add_child(grandchild1, false);
 
-interface.fit_children();
+//interface.fit_children();
+interface.set_size(64, 64);
+interface.overflow = "hidden";
+child1.anchor.set_right_position(8);
+child1.anchor.set_top_position(8);
+show_debug_message(interface);
 show_debug_message(child1);
 show_debug_message(child2);
 show_debug_message(child3);
+
+test = 1;
 
 /*show_debug_message("");
 show_debug_message("Parent: {0}", interface);

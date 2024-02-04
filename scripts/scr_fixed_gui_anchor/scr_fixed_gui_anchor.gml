@@ -49,4 +49,12 @@ function FixedGUIAnchor(_interface): GUIAnchor(_interface) constructor {
 		return top;
 	}
 	
+	/**
+	 * @desc Returns false since fixed anchors are not in the flow
+	 * @returns {Bool} false indicating the anchor isn't in the flow
+	 */
+	static is_in_flow = function() {
+		return false;
+	}
+	
 }

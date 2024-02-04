@@ -49,4 +49,12 @@ function RelativeGUIAnchor(_interface): GUIAnchor(_interface) constructor {
 		return interface.y + top;
 	}
 	
+	/**
+	 * @desc Returns true if the anchor isn't offset
+	 * @returns {Bool} true or false depending if the anchor is offset
+	 */
+	static is_in_flow = function() {
+		return right == 0 && top == 0 && left == 0 && bottom == 0;
+	}
+	
 }

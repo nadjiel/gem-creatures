@@ -4,6 +4,7 @@
 function GUI(): Tree() constructor {
 	static super_add_child = add_child;
 	
+	surface = -1;
 	x = 0; y = 0;
 	width = 0; height = 0;
 	padding = new BoundingBox(0, 0, 0, 0);
@@ -17,6 +18,22 @@ function GUI(): Tree() constructor {
 	border_sprite = 0;
 	border_image = 0;
 	
+	overflow = "shown";
+	
+	/**
+	 * @desc Returns the width desconsidering the borders
+	 */
+	static get_padding_width = function() {
+		return width - border.left - border.right;
+	}
+	
+	/**
+	 * @desc Returns the height desconsidering the borders
+	 */
+	static get_padding_height = function() {
+		return height - border.top - border.bottom;
+	}
+	
 	/**
 	 * @desc Sets the width of this interface respecting its padding and borders and updates the next siblings position to respect it
 	 * @param {Real} _width the width to set
@@ -24,6 +41,11 @@ function GUI(): Tree() constructor {
 	static set_width = function(_width) {
 		if(_width < padding.left + padding.right + border.left + border.right) _width = padding.left + padding.right + border.left + border.right;
 		width = _width;
+		
+		if(surface_exists(surface)) {
+			surface_free(surface);
+			surface = surface_create(get_padding_width(), get_padding_height());
+		}
 		
 		// Making sure the right position is correct with the new width
 		anchor.update_right_position();
@@ -47,6 +69,11 @@ function GUI(): Tree() constructor {
 	static set_height = function(_height) {
 		if(_height < padding.top + padding.bottom + border.top + border.bottom) _height = padding.top + padding.bottom + border.top + border.bottom;
 		height = _height;
+		
+		if(surface_exists(surface)) {
+			surface_free(surface);
+			surface = surface_create(get_padding_width(), get_padding_height());
+		}
 		
 		// Making sure the bottom position is correct with the new height
 		anchor.update_bottom_position();
@@ -396,20 +423,6 @@ function GUI(): Tree() constructor {
 	}
 	
 	/**
-	 * @desc Returns the width desconsidering the borders
-	 */
-	static get_padding_width = function() {
-		return width - border.left - border.right;
-	}
-	
-	/**
-	 * @desc Returns the height desconsidering the borders
-	 */
-	static get_padding_height = function() {
-		return height - border.top - border.bottom;
-	}
-	
-	/**
 	 * @desc Returns the width desconsidering the paddings and borders
 	 */
 	static get_content_width = function() {
@@ -476,13 +489,45 @@ function GUI(): Tree() constructor {
 		if(_fit) fit_children();
 	}
 	
+	static select_self_surface = function(_parent_surface) {
+		if(_parent_surface == -1) {
+			if(surface_get_target() != -1) surface_reset_target();
+			return;
+		}
+		if(_parent_surface != -1) {
+			if(!anchor.is_in_flow()) {
+				if(surface_get_target() != -1) surface_reset_target();
+				return;
+			}
+			if(surface_get_target() == -1) surface_set_target(_parent_surface);
+		}
+	}
+	
+	static get_children_surface = function() {
+		if(overflow == "shown") {
+			surface_free(surface);
+			return -1;
+		}
+		if(overflow == "hidden") {
+			if(!surface_exists(surface)) surface = surface_create(get_padding_width(), get_padding_height());
+			return surface;
+		}
+	}
+	
 	static draw_border = function() {
 		if(border_sprite == 0) return;
 		
+		var _x = get_anchored_x();
+		var _y = get_anchored_y();
+		
+		if(surface_get_target() != -1) {
+			_x -= parent.get_anchored_x() + parent.border.left;
+			_y -= parent.get_anchored_y() + parent.border.top;
+		}
+		
 		draw_sprite_stretched(
 			border_sprite, border_image,
-			get_anchored_x(),
-			get_anchored_y(),
+			_x, _y,
 			width, height
 		);
 	}
@@ -490,19 +535,42 @@ function GUI(): Tree() constructor {
 	static draw_background = function() {
 		if(background_sprite == 0) return;
 		
+		var _x = get_anchored_x();
+		var _y = get_anchored_y();
+		
+		if(surface_get_target() != -1) {
+			_x -= parent.get_anchored_x() + parent.border.left;
+			_y -= parent.get_anchored_y() + parent.border.top;
+		}
+		
 		draw_sprite_stretched(
 			background_sprite, background_image,
-			get_anchored_x() + border.left,
-			get_anchored_y() + border.top,
+			_x + border.left,
+			_y + border.top,
 			get_padding_width(), get_padding_height()
 		);
 	}
 	
-	static draw = function() {
+	static draw = function(_surface) {
+		select_self_surface(_surface);
+		
+		show_debug_message("Node {0} surf: {1}", id, surface_get_target())
 		draw_border();
 		draw_background();
 		
-		array_foreach(children, function(_child) { _child.draw(); });
+		var _children_surface = get_children_surface();
+		
+		array_foreach(children, method({
+			children_surface: _children_surface
+		}, function(_child) { if(_child.anchor.is_in_flow()) _child.draw(children_surface); }));
+		
+		if(surface_get_target() != -1) surface_reset_target();
+		
+		if(surface_exists(surface)) draw_surface(surface, x + border.left, y + border.top);
+		
+		array_foreach(children, method({
+			children_surface: _children_surface
+		}, function(_child) { if(!_child.anchor.is_in_flow()) _child.draw(children_surface); }));
 	}
 	
 	static toString = function() {
