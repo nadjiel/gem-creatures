@@ -5,6 +5,9 @@ function GUI(): Tree() constructor {
 	static super_add_child = add_child;
 	
 	x = 0; y = 0;
+	auto_position = true;
+	in_flow = true;
+	
 	content_width = 0; content_height = 0;
 	width = 0; height = 0;
 	padding = new BoundingBox(0, 0, 0, 0);
@@ -12,8 +15,6 @@ function GUI(): Tree() constructor {
 	margin = new BoundingBox(0, 0, 0, 0);
 	
 	director = new GUIDirectorColumn();
-	
-	anchor = new RelativeGUIAnchor(self);
 	
 	background_sprite = 0;
 	background_image = 0;
@@ -61,10 +62,6 @@ function GUI(): Tree() constructor {
 		
 		// Updating surface with new width
 		update_surface_size();
-		
-		// Making sure the right position is correct with the new width
-		anchor.update_right_position();
-		array_foreach(children, function(_child) { _child.anchor.update_right_position(); });
 	}
 	
 	/**
@@ -78,10 +75,6 @@ function GUI(): Tree() constructor {
 		
 		// Updating surface with new height
 		update_surface_size();
-		
-		// Making sure the bottom position is correct with the new height
-		anchor.update_bottom_position();
-		array_foreach(children, function(_child) { _child.anchor.update_bottom_position(); });
 	}
 	
 	/**
@@ -322,56 +315,6 @@ function GUI(): Tree() constructor {
 	
 	#endregion
 	
-	#region Anchor methods
-	
-	/**
-	 * @desc Returns an anchor instance based on the passed anchor name. If the name is invalid, the return is -1
-	 * @param {String} _anchor_name the name of the anchor to create (either "relative", "absolute" or "fixed")
-	 * @returns {Real | Struct.GUIAnchor} the anchor identified by the name
-	 */
-	static anchor_factory = function(_anchor_name) {
-		switch(_anchor_name) {
-			case "relative": return new RelativeGUIAnchor(self);
-			case "absolute": return new AbsoluteGUIAnchor(self);
-			case "fixed": return new FixedGUIAnchor(self);
-			default: return -1;
-		}
-	}
-	
-	/**
-	 * @desc Sets a new anchor, chosen by the passed string, to this interface
-	 * @param {String} _anchor_name the anchor to add to this interface (either "relative", "absolute" or "fixed")
-	 */
-	static set_anchor = function(_anchor_name) {
-		var _anchor = anchor_factory(_anchor_name);
-		
-		if(_anchor == -1) return;
-		
-		anchor = _anchor;
-		
-		// Sets the correct positions to be top-left since creation
-		anchor.set_top_position(0);
-		anchor.set_left_position(0);
-	}
-	
-	/**
-	 * @desc Returns the x position of this interface with the anchor displacement
-	 * @returns the anchored x position
-	 */
-	static get_anchored_x = function() {
-		return anchor.get_x();
-	}
-	
-	/**
-	 * @desc Returns the y position of this interface with the anchor displacement
-	 * @returns the anchored y position
-	 */
-	static get_anchored_y = function() {
-		return anchor.get_y();
-	}
-	
-	#endregion
-	
 	#region Director methods
 	
 	/**
@@ -436,7 +379,7 @@ function GUI(): Tree() constructor {
 			return;
 		}
 		if(_parent_surface != -1) {
-			if(!anchor.is_in_flow()) {
+			if(!auto_position) {
 				if(surface_get_target() != -1) surface_reset_target();
 				return;
 			}
@@ -458,12 +401,12 @@ function GUI(): Tree() constructor {
 	static draw_border = function() {
 		if(border_sprite == 0) return;
 		
-		var _x = get_anchored_x();
-		var _y = get_anchored_y();
+		var _x = x;
+		var _y = y;
 		
 		if(surface_get_target() != -1) {
-			_x -= parent.get_anchored_x() + parent.border.left;
-			_y -= parent.get_anchored_y() + parent.border.top;
+			_x -= parent.x + parent.border.left;
+			_y -= parent.y + parent.border.top;
 		}
 		
 		draw_sprite_stretched(
@@ -476,12 +419,12 @@ function GUI(): Tree() constructor {
 	static draw_background = function() {
 		if(background_sprite == 0) return;
 		
-		var _x = get_anchored_x();
-		var _y = get_anchored_y();
+		var _x = x;
+		var _y = y;
 		
 		if(surface_get_target() != -1) {
-			_x -= parent.get_anchored_x() + parent.border.left;
-			_y -= parent.get_anchored_y() + parent.border.top;
+			_x -= parent.x + parent.border.left;
+			_y -= parent.y + parent.border.top;
 		}
 		
 		draw_sprite_stretched(
@@ -502,7 +445,7 @@ function GUI(): Tree() constructor {
 		
 		array_foreach(children, method({
 			children_surface: _children_surface
-		}, function(_child) { if(_child.anchor.is_in_flow()) _child.draw(children_surface); }));
+		}, function(_child) { if(_child.auto_position) _child.draw(children_surface); }));
 		
 		if(surface_get_target() != -1) surface_reset_target();
 		
@@ -510,7 +453,7 @@ function GUI(): Tree() constructor {
 		
 		array_foreach(children, method({
 			children_surface: _children_surface
-		}, function(_child) { if(!_child.anchor.is_in_flow()) _child.draw(children_surface); }));
+		}, function(_child) { if(!_child.auto_position) _child.draw(children_surface); }));
 	}
 	
 	#endregion
@@ -523,7 +466,7 @@ function GUI(): Tree() constructor {
 			string("\tpadding: {0};\n", padding) +
 			string("\tborder: {0};\n", border) +
 			string("\tmargin: {0};\n", margin) +
-			string("\tanchor: {0};\n", anchor) +
+			string("\tauto_position: {0};\n", auto_position) +
 		"}";
 	}
 	

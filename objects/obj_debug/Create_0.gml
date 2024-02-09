@@ -14,7 +14,6 @@ child2 = new GUI();
 child3 = new GUI();
 grandchild1 = new GUI();
 
-default_interface.background_sprite = spr_banana;
 interface.background_sprite = spr_inventory_bg;
 interface.border_sprite = spr_inventory_cursor;
 child1.background_sprite = spr_bg;
@@ -52,7 +51,7 @@ default_interface.update_children_position();
 
 interface.overflow = "shown";
 interface.update_content_size();
-//interface.fit_children();
+interface.fit_children();
 show_debug_message(interface.content_width)
 show_debug_message(interface.content_height)
 //interface.fit_children();
