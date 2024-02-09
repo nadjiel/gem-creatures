@@ -42,7 +42,7 @@ child1.add_child(grandchild1);
 interface.director = new GUIDirectorRow();
 
 
-interface.overflow = "hidden";
+interface.set_overflow("hidden");
 interface.update_content_size();
 //interface.set_size(64, 64)
 interface.fit_children();

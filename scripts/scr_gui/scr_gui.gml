@@ -4,6 +4,11 @@
 function GUI(): Tree() constructor {
 	static super_add_child = add_child;
 	
+	enum OVERFLOW {
+		SHOWN,
+		HIDDEN
+	}
+	
 	x = 0; y = 0;
 	auto_position = true;
 	in_flow = true;
@@ -22,7 +27,7 @@ function GUI(): Tree() constructor {
 	border_image = 0;
 	
 	surface = -1;
-	overflow = "shown";
+	overflow = OVERFLOW.SHOWN;
 	
 	x_scroll = 0;
 	y_scroll = 0;
@@ -393,6 +398,53 @@ function GUI(): Tree() constructor {
 	
 	#endregion
 	
+	#region Scroll methods
+	
+	/**
+	 * @desc Returns the x offset provoked by the parents scrolls
+	 */
+	static get_x_scroll_offset = function() {
+		if(!parent) return 0;
+		
+		return (parent.content_width - parent.get_inner_width()) * parent.x_scroll + parent.get_x_scroll_offset();
+	}
+	
+	/**
+	 * @desc Returns the y offset provoked by the parents scrolls
+	 */
+	static get_y_scroll_offset = function() {
+		if(!parent) return 0;
+		
+		return (parent.content_height - parent.get_inner_height()) * parent.y_scroll + parent.get_y_scroll_offset();
+	}
+	
+	/**
+	 * @desc Returns the x position taking the parent scroll into account
+	 */
+	static get_scrolled_x = function() {
+		return x - get_x_scroll_offset();
+	}
+	
+	/**
+	 * @desc Returns the y position taking the parent scroll into account
+	 */
+	static get_scrolled_y = function() {
+		return y - get_y_scroll_offset();
+	}
+	
+	#endregion
+	
+	/**
+	 * @desc Sets the overflow to either "shown" or "hidden"
+	 * @param {String} _overflow the overflow type to set for this GUI
+	 */
+	static set_overflow = function(_overflow) {
+		switch(_overflow) {
+			case "shown": overflow = OVERFLOW.SHOWN; break;
+			case "hidden": overflow = OVERFLOW.HIDDEN;
+		}
+	}
+	
 	/**
 	 * @desc Sets the width and height of this interface to fit its children nicely
 	 */
@@ -433,47 +485,17 @@ function GUI(): Tree() constructor {
 	}
 	
 	static get_children_surface = function() {
-		if(overflow == "shown") {
+		if(overflow == OVERFLOW.SHOWN) {
 			surface_free(surface);
 			return -1;
 		}
-		if(overflow == "hidden") {
+		if(overflow == OVERFLOW.HIDDEN) {
 			if(!surface_exists(surface)) surface = surface_create(get_padding_width(), get_padding_height());
 			return surface;
 		}
 	}
 	
-	/**
-	 * @desc Returns the x offset provoked by the parents scrolls
-	 */
-	static get_x_scroll_offset = function() {
-		if(!parent) return 0;
-		
-		return (parent.content_width - parent.get_inner_width()) * parent.x_scroll + parent.get_x_scroll_offset();
-	}
 	
-	/**
-	 * @desc Returns the y offset provoked by the parents scrolls
-	 */
-	static get_y_scroll_offset = function() {
-		if(!parent) return 0;
-		
-		return (parent.content_height - parent.get_inner_height()) * parent.y_scroll + parent.get_y_scroll_offset();
-	}
-	
-	/**
-	 * @desc Returns the x position taking the parent scroll into account
-	 */
-	static get_scrolled_x = function() {
-		return x - get_x_scroll_offset();
-	}
-	
-	/**
-	 * @desc Returns the y position taking the parent scroll into account
-	 */
-	static get_scrolled_y = function() {
-		return y - get_y_scroll_offset();
-	}
 	
 	static draw_border = function() {
 		if(border_sprite == 0) return;
