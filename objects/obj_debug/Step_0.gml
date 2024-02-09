@@ -6,8 +6,8 @@ global.frame_counter++;
 // Toggles fullscreen on and off
 if(obj_input.keys.esc.press) window_set_fullscreen(!window_get_fullscreen());
 
-if(obj_input.keys.f2.press) { interface.set_width(interface.width + 4); show_debug_message(interface) }
-if(obj_input.keys.f3.press) { interface.set_height(interface.height + 4); show_debug_message(interface) }
+if(obj_input.keys.f2.hold) { interface.x_scroll += 0.1; show_debug_message(interface) }
+if(obj_input.keys.f3.hold) { interface.x_scroll -= 0.1; show_debug_message(interface) }
 if(obj_input.keys.f4.press) { interface.anchor.set_left_position(8); show_debug_message(interface) }
 if(obj_input.keys.f5.press) { interface.anchor.set_bottom_position(8); show_debug_message(interface) }
 

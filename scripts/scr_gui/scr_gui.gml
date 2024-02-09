@@ -24,6 +24,11 @@ function GUI(): Tree() constructor {
 	surface = -1;
 	overflow = "shown";
 	
+	x_scroll = 0;
+	y_scroll = 0;
+	
+	#region Derived getters
+	
 	/**
 	 * @desc Returns the width desconsidering the borders
 	 */
@@ -39,17 +44,22 @@ function GUI(): Tree() constructor {
 	}
 	
 	/**
-	 * @desc Updates the surface size to match the padding width and height
+	 * @desc Returns the width desconsidering the borders and paddings
 	 */
-	static update_surface_size = function() {
-		var _padding_width = get_padding_width();
-		var _padding_height = get_padding_height();
-		
-		if(!surface_exists(surface)) return;
-		if(_padding_width == 0 || _padding_height == 0) return;
-		
-		surface_resize(surface, _padding_width, _padding_height);
+	static get_inner_width = function() {
+		return get_padding_width() - padding.left - padding.right;
 	}
+	
+	/**
+	 * @desc Returns the height desconsidering the borders and paddings
+	 */
+	static get_inner_height = function() {
+		return get_padding_height() - padding.top - padding.bottom;
+	}
+	
+	#endregion
+	
+	#region Size methods
 	
 	/**
 	 * @desc Sets the width of this interface respecting its padding and borders
@@ -59,9 +69,6 @@ function GUI(): Tree() constructor {
 		// Sets width, making sure it isn't smaller than the borders and paddings
 		if(_width < padding.left + padding.right + border.left + border.right) _width = padding.left + padding.right + border.left + border.right;
 		width = _width;
-		
-		// Updating surface with new width
-		update_surface_size();
 	}
 	
 	/**
@@ -72,9 +79,6 @@ function GUI(): Tree() constructor {
 		// Sets height, making sure it isn't smaller than the borders and paddings
 		if(_height < padding.top + padding.bottom + border.top + border.bottom) _height = padding.top + padding.bottom + border.top + border.bottom;
 		height = _height;
-		
-		// Updating surface with new height
-		update_surface_size();
 	}
 	
 	/**
@@ -86,6 +90,8 @@ function GUI(): Tree() constructor {
 		set_width(_width);
 		set_height(_height);
 	}
+	
+	#endregion
 	
 	#region Padding methods
 	
@@ -339,6 +345,32 @@ function GUI(): Tree() constructor {
 	}
 	
 	/**
+	 * @desc Updates the x position of this GUI as the parent of the interface tree
+	 */
+	static update_x_position = function() {
+		x = margin.left;
+		
+		update_children_x_position(self);
+	}
+	
+	/**
+	 * @desc Updates the y position of this GUI as the parent of the interface tree
+	 */
+	static update_y_position = function() {
+		y = margin.top;
+		
+		update_children_y_position(self);
+	}
+	
+	/**
+	 * @desc Updates the position of this GUI as the parent of the interface tree
+	 */
+	static update_position = function() {
+		update_x_position();
+		update_y_position();
+	}
+	
+	/**
 	 * @desc Updates the content width of this GUI according to the director
 	 */
 	static update_content_width = function() {
@@ -373,6 +405,19 @@ function GUI(): Tree() constructor {
 	
 	#region Drawing methods
 	
+	/**
+	 * @desc Updates the surface size to match the padding width and height
+	 */
+	static update_surface_size = function() {
+		var _padding_width = get_padding_width();
+		var _padding_height = get_padding_height();
+		
+		if(!surface_exists(surface)) return;
+		if(_padding_width == 0 || _padding_height == 0) return;
+		
+		surface_resize(surface, _padding_width, _padding_height);
+	}
+	
 	static select_self_surface = function(_parent_surface) {
 		if(_parent_surface == -1) {
 			if(surface_get_target() != -1) surface_reset_target();
@@ -398,13 +443,47 @@ function GUI(): Tree() constructor {
 		}
 	}
 	
+	/**
+	 * @desc Returns the x offset provoked by the parents scrolls
+	 */
+	static get_x_scroll_offset = function() {
+		if(!parent) return 0;
+		
+		return (parent.content_width - parent.get_inner_width()) * parent.x_scroll + parent.get_x_scroll_offset();
+	}
+	
+	/**
+	 * @desc Returns the y offset provoked by the parents scrolls
+	 */
+	static get_y_scroll_offset = function() {
+		if(!parent) return 0;
+		
+		return (parent.content_height - parent.get_inner_height()) * parent.y_scroll + parent.get_y_scroll_offset();
+	}
+	
+	/**
+	 * @desc Returns the x position taking the parent scroll into account
+	 */
+	static get_scrolled_x = function() {
+		return x - get_x_scroll_offset();
+	}
+	
+	/**
+	 * @desc Returns the y position taking the parent scroll into account
+	 */
+	static get_scrolled_y = function() {
+		return y - get_y_scroll_offset();
+	}
+	
 	static draw_border = function() {
 		if(border_sprite == 0) return;
 		
-		var _x = x;
-		var _y = y;
+		// Starting by the scroll affected positions
+		var _x = get_scrolled_x();
+		var _y = get_scrolled_y();
 		
 		if(surface_get_target() != -1) {
+			// Transforming absolute position in relative to the parent surface
 			_x -= parent.x + parent.border.left;
 			_y -= parent.y + parent.border.top;
 		}
@@ -419,10 +498,12 @@ function GUI(): Tree() constructor {
 	static draw_background = function() {
 		if(background_sprite == 0) return;
 		
-		var _x = x;
-		var _y = y;
+		// Starting by the scroll affected positions
+		var _x = get_scrolled_x();
+		var _y = get_scrolled_y();
 		
 		if(surface_get_target() != -1) {
+			// Transforming absolute position in relative to the parent surface
 			_x -= parent.x + parent.border.left;
 			_y -= parent.y + parent.border.top;
 		}
@@ -435,7 +516,7 @@ function GUI(): Tree() constructor {
 		);
 	}
 	
-	static draw = function(_surface) {
+	static draw = function(_surface = -1) {
 		select_self_surface(_surface);
 		
 		draw_border();
@@ -467,6 +548,8 @@ function GUI(): Tree() constructor {
 			string("\tborder: {0};\n", border) +
 			string("\tmargin: {0};\n", margin) +
 			string("\tauto_position: {0};\n", auto_position) +
+			string("\tin_flow: {0};\n", in_flow) +
+			string("\tscroll: {0} x {1};\n", x_scroll, y_scroll) +
 		"}";
 	}
 	

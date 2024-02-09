@@ -3,11 +3,6 @@
 // Flag that tells if debug mode is on or off
 debug = false;
 
-default_interface = new GUI();
-default_interface.overflow = "hidden";
-default_interface.set_width(display_get_gui_width());
-default_interface.set_height(display_get_gui_height());
-
 interface = new GUI();
 child1 = new GUI();
 child2 = new GUI();
@@ -39,7 +34,6 @@ grandchild1.set_size(4, 4);
 //content_width = 16 + 32 + 8 = 56
 //content_height = 16 + 8 | 32 + 8 | 8
 
-default_interface.add_child(interface);
 interface.add_child(child1);
 interface.add_child(child2);
 interface.add_child(child3);
@@ -47,15 +41,17 @@ child1.add_child(grandchild1);
 
 interface.director = new GUIDirectorRow();
 
-default_interface.update_children_position();
 
-interface.overflow = "shown";
+interface.overflow = "hidden";
 interface.update_content_size();
+//interface.set_size(64, 64)
 interface.fit_children();
+interface.set_width(80);
+interface.x_scroll = 1;
 show_debug_message(interface.content_width)
 show_debug_message(interface.content_height)
 //interface.fit_children();
-//interface.update_position();
+interface.update_position();
 
 show_debug_message(interface);
 show_debug_message(child1);
