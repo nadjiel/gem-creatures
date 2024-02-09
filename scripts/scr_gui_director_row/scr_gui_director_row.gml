@@ -41,4 +41,62 @@ function GUIDirectorRow(): GUIDirector() constructor {
 		_gui.content_height = _content_height;
 	}
 	
+	/**
+	 * @desc Updates the x position of the passed GUI's children
+	 * @param {Struct.GUI} _gui the GUI to update the children positions
+	 */
+	static update_children_x_position = function(_gui) {
+		var _children_amount = array_length(_gui.children);
+		
+		for(var _i = 0; _i < _children_amount; _i++) {
+			var _child = _gui.children[_i];
+			
+			// Sets x to be just inside GUI
+			_child.x = _child.margin.left;
+			
+			// Sets x to be just inside parent
+			_child.x = _gui.get_anchored_x() + _gui.border.left + _gui.padding.left + _child.margin.left;
+			
+			// Looks for the last relative anchored sibling
+			var _child_index = _gui.get_child_index(_child);
+			var _last_relative_sibling_index = array_find_index(_gui.children, method({ index: _child_index }, function(_child, _i) {
+				if(_i == index) return false;
+			
+				return _child.anchor.name == "relative";
+			}), _child_index, -infinity);
+		
+			// If the last child was found
+			if(_last_relative_sibling_index != -1) {
+				var _last_relative_sibling = _gui.children[_last_relative_sibling_index];
+			
+				// Sets the x coordinate of the new child to be to the right of its younger sibling
+				_child.x = _last_relative_sibling.x + _last_relative_sibling.width + _last_relative_sibling.margin.right + _child.margin.left;
+			}
+			
+			// Updates the position of the children as well
+			_child.update_children_x_position();
+		}
+	}
+	
+	/**
+	 * @desc Updates the y position of the passed GUI's children
+	 * @param {Struct.GUI} _gui the GUI to update the children positions
+	 */
+	static update_children_y_position = function(_gui) {
+		var _children_amount = array_length(_gui.children);
+		
+		for(var _i = 0; _i < _children_amount; _i++) {
+			var _child = _gui.children[_i];
+			
+			// Sets y to be just inside GUI
+			_child.y = _child.margin.top;
+		
+			// Sets y to be just inside parent
+			_child.y = _gui.get_anchored_y() + _gui.border.top + _gui.padding.top + _child.margin.top;
+		
+			// Updates the position of the children as well
+			_child.update_children_y_position();
+		}
+	}
+	
 }

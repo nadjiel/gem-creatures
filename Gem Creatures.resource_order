@@ -18,6 +18,7 @@
     {"name":"Input","order":15,"path":"folders/Scripts/Input.yy",},
     {"name":"Interface","order":16,"path":"folders/Scripts/Interface.yy",},
     {"name":"Anchors","order":1,"path":"folders/Scripts/Interface/Anchors.yy",},
+    {"name":"Directors","order":2,"path":"folders/Scripts/Interface/Directors.yy",},
     {"name":"Items","order":13,"path":"folders/Scripts/Items.yy",},
     {"name":"States","order":9,"path":"folders/Scripts/States.yy",},
     {"name":"Sequences","order":11,"path":"folders/Sequences.yy",},
@@ -34,7 +35,6 @@
     {"name":"Items","order":5,"path":"folders/Sprites/Items.yy",},
     {"name":"Tile Sets","order":2,"path":"folders/Tile Sets.yy",},
     {"name":"Timelines","order":8,"path":"folders/Timelines.yy",},
-    {"name":"Directors","order":2,"path":"folders/Scripts/Interface/Directors.yy",},
   ],
   "ResourceOrderSettings": [
     {"name":"obj_interface","order":3,"path":"objects/obj_interface/obj_interface.yy",},

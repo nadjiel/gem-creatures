@@ -5,7 +5,7 @@ if(debug) {
 	show_game_size_info();
 }
 
-interface.draw(-1);
+default_interface.draw(-1);
 
 if(test == 1) {
 	test++;

@@ -94,6 +94,8 @@ function GUI(): Tree() constructor {
 		set_height(_height);
 	}
 	
+	#region Padding methods
+	
 	/**
 	 * @desc Sets the right padding
 	 * @param {Real} _padding the padding to set
@@ -169,6 +171,10 @@ function GUI(): Tree() constructor {
 		set_left_padding(_left);
 		set_bottom_padding(_bottom);
 	}
+	
+	#endregion
+	
+	#region Border methods
 	
 	/**
 	 * @desc Sets the right border
@@ -246,46 +252,9 @@ function GUI(): Tree() constructor {
 		set_bottom_border(_bottom);
 	}
 	
-	/**
-	 * @desc Updates the position of this interface taking a column layout in consideration
-	 */
-	static update_position = function() {
-		// Sets x and y to be just inside GUI
-		x = margin.left;
-		y = margin.top;
-		
-		if(parent) {
-			// Sets x and y to be just inside parent
-			x = parent.get_anchored_x() + parent.border.left + parent.padding.left + margin.left;
-			y = parent.get_anchored_y() + parent.border.top + parent.padding.top + margin.top;
-		
-			// Looks for the last relative anchored sibling
-			var _index = parent.get_child_index(self);
-			var _last_relative_sibling_index = array_find_index(parent.children, method({ index: _index }, function(_child, _i) {
-				if(_i == index) return false;
-			
-				return _child.anchor.name == "relative";
-			}), _index, -infinity);
-		
-			// If the last child was found
-			if(_last_relative_sibling_index != -1) {
-				var _last_relative_sibling = parent.children[_last_relative_sibling_index];
-			
-				// Sets the y coordinate of the new child to be right under its younger sibling
-				y = _last_relative_sibling.y + _last_relative_sibling.height + _last_relative_sibling.margin.bottom + margin.top;
-			}
-		}
-		
-		// Updates the position of the children as well
-		update_children_position();
-	}
+	#endregion
 	
-	/**
-	 * @desc Updates the position of the children of this interface
-	 */
-	static update_children_position = function() {
-		array_foreach(children, function(_child) { _child.update_position(); });
-	}
+	#region Margin methods
 	
 	/**
 	 * @desc Sets the right margin
@@ -351,6 +320,10 @@ function GUI(): Tree() constructor {
 		set_bottom_margin(_bottom);
 	}
 	
+	#endregion
+	
+	#region Anchor methods
+	
 	/**
 	 * @desc Returns an anchor instance based on the passed anchor name. If the name is invalid, the return is -1
 	 * @param {String} _anchor_name the name of the anchor to create (either "relative", "absolute" or "fixed")
@@ -397,12 +370,53 @@ function GUI(): Tree() constructor {
 		return anchor.get_y();
 	}
 	
+	#endregion
+	
+	#region Director methods
+	
 	/**
-	 * @desc Updates the content size of this interface
+	 * @desc Updates the x position of the children of this GUI according to the director
+	 */
+	static update_children_x_position = function() {
+		director.update_children_x_position(self);
+	}
+	
+	/**
+	 * @desc Updates the y position of the children of this GUI according to the director
+	 */
+	static update_children_y_position = function() {
+		director.update_children_y_position(self);
+	}
+	
+	/**
+	 * @desc Updates the position of the children of this GUI according to the director
+	 */
+	static update_children_position = function() {
+		director.update_children_position(self);
+	}
+	
+	/**
+	 * @desc Updates the content width of this GUI according to the director
+	 */
+	static update_content_width = function() {
+		director.update_content_width(self);
+	}
+	
+	/**
+	 * @desc Updates the content height of this GUI according to the director
+	 */
+	static update_content_height = function() {
+		director.update_content_height(self);
+	}
+	
+	/**
+	 * @desc Updates the content size of this GUI according to the director
 	 */
 	static update_content_size = function() {
 		director.update_content_size(self);
 	}
+	
+	#endregion
 	
 	/**
 	 * @desc Sets the width and height of this interface to fit its children nicely
@@ -414,16 +428,7 @@ function GUI(): Tree() constructor {
 		set_size(_width, _height);
 	}
 	
-	/**
-	 * @desc Adds a child under the existing ones in a column layout
-	 * @param {Struct.GUI} _child the child to add to this interface node
-	 */
-	static add_child = function(_child) {
-		super_add_child(_child);
-		
-		// Calculates the position of the new child
-		_child.update_position();
-	}
+	#region Drawing methods
 	
 	static select_self_surface = function(_parent_surface) {
 		if(_parent_surface == -1) {
@@ -507,6 +512,8 @@ function GUI(): Tree() constructor {
 			children_surface: _children_surface
 		}, function(_child) { if(!_child.anchor.is_in_flow()) _child.draw(children_surface); }));
 	}
+	
+	#endregion
 	
 	static toString = function() {
 		return "{\n" +
